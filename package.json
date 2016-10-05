@@ -1,0 +1,29 @@
+{
+  "name": "GradePredictionTool",
+  "version": "1.0.0",
+  "description": "Package management for GPT",
+  "scripts": {
+    "deploy": "cd public && aws s3 sync . s3://projection-tool/",
+    "start": "http-server",
+    "lint": "htmlhint public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xanndarr/GradeProjectionTool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xanndarr/GradeProjectionTool/issues"
+  },
+  "homepage": "https://github.com/Xanndarr/GradeProjectionTool#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "htmlhint": "^0.9.13",
+    "http-server": "^0.9.0",
+    "pre-commit": "^1.1.3"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
