@@ -79,6 +79,28 @@
           </table>
         </div>
 
+        <div id="year10" class="table">
+          <table>
+            <h3>Year 10</h3>
+            <tr>
+              <th>Subject</th>
+              <th>Target Grade</th>
+            </tr>
+            <tr class="english">
+              <td>English</td>
+              <td class="targetData"></td>
+            </tr>
+            <tr class="maths">
+              <td>Maths</td>
+              <td class="targetData"></td>
+            </tr>
+            <tr class="science">
+              <td>Science</td>
+              <td class="targetData"></td>
+            </tr>
+          </table>
+        </div>
+
         <div id="gcses" class="table">
           <table>
             <h3>GCSEs</h3>
@@ -100,6 +122,17 @@
             </tr>
           </table>
         </div>
+
+
+        <select id="choose-year">
+            <option value="choose">Choose Year Group</option>
+            <option value="year7" onclick="y7showform()">Year 7</option>
+            <option value="year8" onclick="y8showform()">Year 8</option>
+            <option value="year9" onclick="y9showform()">Year 9</option>
+            <option value="year10" onclick="y10showform()">Year 10</option>
+            <option value="year11" onclick="y11showform()">Year 11</option>
+        </select>
+
 
         <h2>Grade Entry/Control Panel</h2>
         <div id="gradeEntry" class="table">
