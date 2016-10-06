@@ -96,9 +96,9 @@ function predictGrades(yearAsNum, targetGrade) {
     	case "sublevels":
     	    return predictSublevels(yearAsNum, targetGrade);
     		break;
-    	// case "letters":
-    	//     return predictLetters(yearAsNum, targetGrade);
-    	// 	break;
+    	case "letters":
+    	    return predictLetters(targetGrade);
+    		break;
     	case "percentages":
     	    return predictPercentages(yearAsNum, targetGrade);
     		break;
@@ -140,6 +140,14 @@ function predictPercentages(year, grade) {
 	predictions.push(convertPercentageToGCSEGrade(grade));
 	return predictions;
 }
+
+//year10 only 
+function predictLetters(grade) {
+	let predictions = [];
+	predictions.push(predictedGCSEGradeY10Letter(grade));
+	return predictions;
+}
+
 // Show relevant form fields for each year group
 function y7showform() {
 	$("#year7").show();
