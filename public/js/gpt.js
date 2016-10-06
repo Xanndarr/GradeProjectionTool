@@ -99,16 +99,16 @@ function predictGrades(yearAsNum, targetGrade) {
     	// case "letters":
     	//     return predictLetters(yearAsNum, targetGrade);
     	// 	break;
-    	// case "percentages":
-    	//     return predictPercentages(yearAsNum, targetGrade);
-    	// 	break;
+    	case "percentages":
+    	    return predictPercentages(yearAsNum, targetGrade);
+    		break;
     	default:
     		console.log("grade format invalid");
     }
 }
 
 function predictNumbers(year, grade) {
-	const predictions = [];
+	let predictions = [];
 	while (year <= 10) {
 		year++;
 		predictions.push(predictedNumberGrade(year.toString(), grade));
@@ -119,7 +119,7 @@ function predictNumbers(year, grade) {
 }
 
 function predictSublevels(year, grade) {
-	const predictions = [];
+	let predictions = [];
 	while (year < 9) {
 		year++;
 		predictions.push(predictedSublevelsGrade(grade));
@@ -130,6 +130,16 @@ function predictSublevels(year, grade) {
 	return predictions;
 }
  
+function predictPercentages(year, grade) {
+	let predictions = [];
+	while (year < 9) {
+		year++;
+		predictions.push(predictedPercentageGrade(grade));
+		grade = predictedPercentageGrade(grade);
+	}
+	predictions.push(convertPercentageToGCSEGrade(grade));
+	return predictions;
+}
 // Show relevant form fields for each year group
 function y7showform() {
 	$("#year7").show();

@@ -133,15 +133,15 @@ function convertPercentageToGCSEGrade(percentageY9) {
     return '1(F/G)';
   } else if (percentageAsInt <= 36) {
     return '2(E/F)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 56) {
     return '3(D)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 68) {
     return '4(C)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 76) {
     return '5(B/C)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 80) {
     return '6-(B)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 96) {
     return '7(A)';
   } else if (percentageAsInt > 96) {
     return '8+/9(A*)';
