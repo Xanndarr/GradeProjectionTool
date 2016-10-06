@@ -1,3 +1,13 @@
+$(document).ready(function() {
+	$('#choose-grade-format-ks4').hide();
+	$('#choose-grade-format-ks3').hide();
+	$('#year7').hide();
+	$('#year8').hide();
+	$('#year9').hide();
+	$('#year10').hide();
+	$('#gcses').hide();
+});
+
 $("#calcButton").click(function() {
   const rows = $("#gradeEntry").find("tr");
   rows.each(function(index, row) {
@@ -86,7 +96,14 @@ function convertNumToYearGroup(yearGroup) {
 }
 
 function predictGrades(yearAsNum, targetGrade) {
-    const dropdown = document.getElementById("choose-grade-format");
+	let dropdown;
+
+	if (yearAsNum == 10 || yearAsNum == 11) {
+    	dropdown = document.getElementById("choose-grade-format-ks4");		
+	} else {
+		dropdown = document.getElementById("choose-grade-format-ks3");	
+	}
+
     const gradeFormat = dropdown.options[dropdown.selectedIndex].value;
 
     switch(gradeFormat) {
@@ -109,10 +126,11 @@ function predictGrades(yearAsNum, targetGrade) {
 
 function predictNumbers(year, grade) {
 	let predictions = [];
-	while (year <= 10) {
-		year++;
-		predictions.push(predictedNumberGrade(year.toString(), grade));
+	while (year < 10) {
+		console.log(year);
 		grade = predictedNumberGrade(year.toString(), grade);
+		predictions.push(grade);
+		year++;
 	}
 	return predictions;
 
@@ -122,9 +140,8 @@ function predictSublevels(year, grade) {
 	let predictions = [];
 	while (year < 9) {
 		year++;
-		predictions.push(predictedSublevelsGrade(grade));
 		grade = predictedSublevelsGrade(grade);
-
+		predictions.push(grade);
 	}
 	predictions.push(convertSublevelToGCSEGrade(grade));
 	return predictions;
@@ -134,8 +151,8 @@ function predictPercentages(year, grade) {
 	let predictions = [];
 	while (year < 9) {
 		year++;
-		predictions.push(predictedPercentageGrade(grade));
 		grade = predictedPercentageGrade(grade);
+		predictions.push(grade + '%');
 	}
 	predictions.push(convertPercentageToGCSEGrade(grade));
 	return predictions;
@@ -150,6 +167,8 @@ function predictLetters(grade) {
 
 // Show relevant form fields for each year group
 function y7showform() {
+	$('#choose-grade-format-ks4').hide();
+	$('#choose-grade-format-ks3').show();
 	$("#year7").show();
 	$("#year8").show();
 	$("#year9").show();
@@ -158,6 +177,8 @@ function y7showform() {
 }
 
 function y8showform() {
+	$('#choose-grade-format-ks4').hide();
+	$('#choose-grade-format-ks3').show();
 	$("#year7").hide();
 	$("#year8").show();
 	$("#year9").show();
@@ -166,6 +187,8 @@ function y8showform() {
 }
 
 function y9showform() {
+	$('#choose-grade-format-ks4').hide();
+	$('#choose-grade-format-ks3').show();
 	$("#year7").hide();
 	$("#year8").hide();
 	$("#year9").show();
@@ -174,6 +197,8 @@ function y9showform() {
 }
 
 function y10showform() {
+	$('#choose-grade-format-ks3').hide();
+	$('#choose-grade-format-ks4').show();
 	$("#year7").hide();
 	$("#year8").hide();
 	$("#year9").hide();
@@ -182,6 +207,8 @@ function y10showform() {
 }
 
 function y11showform() {
+	$('#choose-grade-format-ks3').hide();
+	$('#choose-grade-format-ks4').show();
 	$("#year7").hide();
 	$("#year8").hide();
 	$("#year9").hide();
