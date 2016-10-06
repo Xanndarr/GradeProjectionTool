@@ -12,32 +12,35 @@ $("#calcButton").click(function() {
   const rows = $("#gradeEntry").find("tr");
   rows.each(function(index, row) {
     const inputs = $(row).find("input");
+		console.log(row)
+		console.log(inputs.length)
     let subject = "null";
     let targetGrade;
     if (inputs.length) {
     	subject = inputs[0].name;
+			console.log('here')
     	targetGrade = inputs[0].value;
+			const dropdown = document.getElementById("choose-year");
+	    const yearGroup = dropdown.options[dropdown.selectedIndex].value;
+
+	    let yearAsNum = convertYearGroupToNum(yearGroup);
+			console.log(yearAsNum, targetGrade)
+	    let predictedGrades = predictGrades(yearAsNum, targetGrade);
+	    console.log(predictedGrades);
+
+	    //Set correlating year group box to predicted grade for that year
+	   	$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(targetGrade);
+
+	   	//Calculate predicted grades for subsequent years and populate form
+	   	let yearCounter = yearAsNum;
+	   	while (predictedGrades.length > 1) {
+	   		yearCounter++;
+	   		let newYearGroup = convertNumToYearGroup(yearCounter);
+	   		$(`#${newYearGroup}`).find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
+	   	}
+
+	   	$("#gcses").find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
     };
-    const dropdown = document.getElementById("choose-year");
-    const yearGroup = dropdown.options[dropdown.selectedIndex].value;
-    
-    let yearAsNum = convertYearGroupToNum(yearGroup);
-    let predictedGrades = predictGrades(yearAsNum, targetGrade);
-    console.log(predictedGrades);
-
-    //Set correlating year group box to predicted grade for that year
-   	$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(targetGrade);
-
-   	//Calculate predicted grades for subsequent years and populate form
-   	let yearCounter = yearAsNum;
-   	while (predictedGrades.length > 1) {
-   		yearCounter++;
-   		let newYearGroup = convertNumToYearGroup(yearCounter);
-   		$(`#${newYearGroup}`).find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
-   	}
-
-   	$("#gcses").find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
-
   });
 });
 
@@ -99,29 +102,29 @@ function predictGrades(yearAsNum, targetGrade) {
 	let dropdown;
 
 	if (yearAsNum == 10 || yearAsNum == 11) {
-    	dropdown = document.getElementById("choose-grade-format-ks4");		
+    	dropdown = document.getElementById("choose-grade-format-ks4");
 	} else {
-		dropdown = document.getElementById("choose-grade-format-ks3");	
+		dropdown = document.getElementById("choose-grade-format-ks3");
 	}
 
-    const gradeFormat = dropdown.options[dropdown.selectedIndex].value;
+  const gradeFormat = dropdown.options[dropdown.selectedIndex].value;
 
-    switch(gradeFormat) {
-    	case "numbers":
-    		return predictNumbers(yearAsNum, targetGrade);
-    		break;
-    	case "sublevels":
-    	    return predictSublevels(yearAsNum, targetGrade);
-    		break;
-    	case "letters":
-    	    return predictLetters(targetGrade);
-    		break;
-    	case "percentages":
-    	    return predictPercentages(yearAsNum, targetGrade);
-    		break;
-    	default:
-    		console.log("grade format invalid");
-    }
+  switch(gradeFormat) {
+  	case "numbers":
+  		return predictNumbers(yearAsNum, targetGrade);
+  		break;
+  	case "sublevels":
+  	    return predictSublevels(yearAsNum, targetGrade);
+  		break;
+  	case "letters":
+  	    return predictLetters(targetGrade);
+  		break;
+  	case "percentages":
+  	    return predictPercentages(yearAsNum, targetGrade);
+  		break;
+  	default:
+  		console.log("grade format invalid");
+  }
 }
 
 function predictNumbers(year, grade) {
@@ -146,7 +149,7 @@ function predictSublevels(year, grade) {
 	predictions.push(convertSublevelToGCSEGrade(grade));
 	return predictions;
 }
- 
+
 function predictPercentages(year, grade) {
 	let predictions = [];
 	while (year < 9) {
@@ -158,15 +161,34 @@ function predictPercentages(year, grade) {
 	return predictions;
 }
 
-//year10 only 
+//year10 only
 function predictLetters(grade) {
 	let predictions = [];
 	predictions.push(predictedGCSEGradeY10Letter(grade));
 	return predictions;
 }
 
+$("#choose-year").change(function() {
+	const dropdown = $("#choose-year");
+	const year = dropdown[0].value;
+	switch (year) {
+		case "year7":
+			return y7showform();
+		case "year8":
+			return y8showform();
+		case "year9":
+			return y9showform();
+		case "year10":
+			return y10showform();
+		case "year11":
+			return y11showform();
+		default:
+	}
+});
+
 // Show relevant form fields for each year group
 function y7showform() {
+	console.log('y7')
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").show();

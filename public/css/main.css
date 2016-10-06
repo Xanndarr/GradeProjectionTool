@@ -1,5 +1,6 @@
 body {
   width: 100vw;
+  height: 100vh;
   margin: 0;
   font-family: "ABeeZee", Helvetica, Arial, sans-serif;
   background: #296092;
@@ -64,6 +65,6 @@ button:active {
   height: 110px;
 }
 
-#chooseYearDiv {
+#chooseYearDiv, #chooseGradeDiv {
   margin: 0 auto 15px auto;
 }

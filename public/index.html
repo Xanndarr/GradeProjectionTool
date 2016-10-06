@@ -21,6 +21,56 @@
           </div>
 
           <div class="container">
+            <h2>Grade Entry/Control Panel</h2>
+            <div id="chooseYearDiv">
+              <select id="choose-year">
+                  <option value="choose">Choose Year Group</option>
+                  <option value="year7" onclick="y7showform()">Year 7</option>
+                  <option value="year8" onclick="y8showform()">Year 8</option>
+                  <option value="year9" onclick="y9showform()">Year 9</option>
+                  <option value="year10" onclick="y10showform()">Year 10</option>
+                  <option value="year11" onclick="y11showform()">Year 11</option>
+              </select>
+            </div>
+            <div id="chooseGradeDiv">
+              <select id="choose-grade-format-ks4">
+                  <option value="choose-grade">Choose Grade Format</option>
+                  <option value="numbers">Numbers (1- to 9+)</option>
+                  <option value="letters">Letters (A* to U)</option>
+              </select>
+              <select id="choose-grade-format-ks3">
+                  <option value="choose-grade">Choose Grade Format</option>
+                  <option value="numbers">Numbers (1- to 9+)</option>
+                  <option value="percentages">Percentages (%)</option>
+                  <option value="sublevels">Sublevels (8a+ - 1c)</option>
+              </select>
+            </div>
+            <div id="gradeEntry" class="table">
+              <table>
+                <tr>
+                  <th>Subject</th>
+                  <th>Year target</th>
+                </tr>
+                <tr>
+                  <td>English</td>
+                  <td><input name="english" type="text" /></td>
+                </tr>
+                <tr>
+                  <td>Maths</td>
+                  <td><input name="maths" type="text" /></td>
+                </tr>
+                <tr>
+                  <td>Science</td>
+                  <td><input name="science" type="text" /></td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <button id="calcButton">Calculate</button>
+            </div>
+          </div>
+          
+          <div class="container">
             <h2>Predictions</h2>
             <div id="year7" class="table">
               <h3>Year 7</h3>
@@ -130,56 +180,6 @@
                   <td class="targetData"></td>
                 </tr>
               </table>
-            </div>
-          </div>
-
-          <div class="container">
-            <h2>Grade Entry/Control Panel</h2>
-            <div id="chooseYearDiv">
-              <select id="choose-year">
-                  <option value="choose">Choose Year Group</option>
-                  <option value="year7" onclick="y7showform()">Year 7</option>
-                  <option value="year8" onclick="y8showform()">Year 8</option>
-                  <option value="year9" onclick="y9showform()">Year 9</option>
-                  <option value="year10" onclick="y10showform()">Year 10</option>
-                  <option value="year11" onclick="y11showform()">Year 11</option>
-              </select>
-            </div>
-            <div id="chooseGradeDiv">
-              <select id="choose-grade-format-ks4">
-                  <option value="choose-grade">Choose Grade Format</option>
-                  <option value="numbers">Numbers (1- to 9+)</option>
-                  <option value="letters">Letters (A* to U)</option>
-              </select>
-              <select id="choose-grade-format-ks3">
-                  <option value="choose-grade">Choose Grade Format</option>
-                  <option value="numbers">Numbers (1- to 9+)</option>
-                  <option value="percentages">Percentages (%)</option>
-                  <option value="sublevels">Sublevels (8a+ - 1c)</option>
-              </select>
-            </div>
-            <div id="gradeEntry" class="table">
-              <table>
-                <tr>
-                  <th>Subject</th>
-                  <th>Year target</th>
-                </tr>
-                <tr>
-                  <td>English</td>
-                  <td><input name="english" type="text" /></td>
-                </tr>
-                <tr>
-                  <td>Maths</td>
-                  <td><input name="maths" type="text" /></td>
-                </tr>
-                <tr>
-                  <td>Science</td>
-                  <td><input name="science" type="text" /></td>
-                </tr>
-              </table>
-            </div>
-            <div>
-              <button id="calcButton">Calculate</button>
             </div>
           </div>
         </div>
