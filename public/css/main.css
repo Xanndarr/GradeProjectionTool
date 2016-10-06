@@ -1,0 +1,69 @@
+body {
+
+}
+
+#content {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: "ABeeZee", Helvetica, Arial, sans-serif;
+  background: #296092;
+  background: -webkit-linear-gradient(#296092, #609bd2);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#296092, #609bd2);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#296092, #609bd2);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#296092, #609bd2);
+  /* Standard syntax */
+}
+
+h1 {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+button {
+  font-family: inherit;
+  text-decoration: none;
+  color: white;
+  width: 100px;
+  height: 30px;
+  margin: 10px auto;
+  background-color: #296092;
+  border: 2px solid #296092;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #296092;
+}
+
+button:active {
+  background-color: #296092;
+  color: white;
+}
+
+.header {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container {
+  width: 90%;
+  padding: 0 0 15px 15px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 15px solid #eebc29;
+  border-radius: 5px;
+}
+
+.logo {
+  width: 155px;
+  height: 110px;
+}
+
+#chooseYearDiv {
+  margin: 0 auto 15px auto;
+}

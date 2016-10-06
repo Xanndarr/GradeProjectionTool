@@ -1,5 +1,26 @@
 .table {
   display: inline-block;
   width: 200px;
+  text-align: left;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+th {
+  padding: 5px;
+  font-weight: bold;
+}
+
+td {
+  padding: 2px 5px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+.table h3 {
+  text-align: center;
+}
