@@ -29,7 +29,11 @@ $("#calcButton").click(function() {
 	    console.log(predictedGrades);
 
 	    //Set correlating year group box to predicted grade for that year
-	   	$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(targetGrade);
+			let formattedGrade = targetGrade;
+			if ($("#choose-grade-format-ks3").is(":visible") && $("#choose-grade-format-ks3")[0].value === "percentages") {
+				formattedGrade = targetGrade + "%";
+			}
+	   	$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(formattedGrade);
 
 	   	//Calculate predicted grades for subsequent years and populate form
 	   	let yearCounter = yearAsNum;
@@ -186,7 +190,7 @@ $("#choose-year").change(function() {
 			return y9showform();
 		case "year10":
 			return y10showform();
-		case "year11":
+		case "gcses":
 			return y11showform();
 		default:
 	}
