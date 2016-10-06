@@ -43,10 +43,10 @@ gradesMatrixNumbers[2] = ['1(F/G)', '1(F/G)', '2(E/F)', '2(E/F)', '3(D)', '3(D)'
                           '7(A)','8+(A*)','8+(A*)','8+(A*)','9(A*)','9(A*)',
                           '9(A*)','9(A*)', '9(A*)']
 //Y10 predicted GCSE grades
-gradesMatrixNumbers[3] = ['1(F/G)', '1(F/G)', '1(F/G)', '1(F/G)', '2(E/F)', '2(E/F)', 
-                          '2(E/F)', '3(D)', '3(D)', '3(D)', '4(C)', '4(C)', '4(C)',
-                          '5(B/C)', '5(B/C)', '6-(B)', '6-(B)','6-(B)','6-(B)', '7(A)',
-                          '7(A)', '7(A)', '7(A)', '8+(A*)','8+(A*)','9(A*)','9(A*)']
+gradesMatrixNumbers[3] = ['1+(F/G)', '2(F/G)', '2+(F/G)', '3-(F/G)', '3(E/F)', '3+(E/F)', 
+                          '4-(E/F)', '4(D)', '4+(D)', '5-(D)', '5(C)', '5+(C)', '5+(C)',
+                          '6-(B/C)', '6+(B/C)', '7(B)', '7+(B)','8-(B)','8(B)', '8+(A)',
+                          '8+(A)', '9-(A)', '9-(A)', '9(A*)','9(A*)','9+(A*)','9+(A*)']
 //Y11 don't need
 
 //helper function to correlate number grades as numbers for comparisons and
@@ -66,7 +66,6 @@ function predictedNumberGrade(year, grade) {
   var yearIndex = years.indexOf(year);
   return gradesMatrixNumbers[yearIndex][gradeIndex];
 }
-
 //*********************GRADE FORMAT: SUBLEVELS***********************
 //- The predicted grade for the subsequent year is simply two sublevels above
 
