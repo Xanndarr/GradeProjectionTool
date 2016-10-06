@@ -145,6 +145,19 @@
                   <option value="year11" onclick="y11showform()">Year 11</option>
               </select>
             </div>
+            <div id="chooseGradeDiv">
+              <select id="choose-grade-format-ks4">
+                  <option value="choose-grade">Choose Grade Format</option>
+                  <option value="numbers">Numbers (1- to 9+)</option>
+                  <option value="letters">Letters (A* to U)</option>
+              </select>
+              <select id="choose-grade-format-ks3">
+                  <option value="choose-grade">Choose Grade Format</option>
+                  <option value="numbers">Numbers (1- to 9+)</option>
+                  <option value="percentages">Percentages (%)</option>
+                  <option value="sublevels">Sublevels (8a+ - 1c)</option>
+              </select>
+            </div>
             <div id="gradeEntry" class="table">
               <table>
                 <tr>
@@ -172,6 +185,7 @@
         </div>
 
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.1.min.js"><\/script>')</script>
+        <script src="js/grades.js"></script>
         <script src="js/gpt.js"></script>
     </body>
 </html>
