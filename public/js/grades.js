@@ -43,11 +43,15 @@ gradesMatrixNumbers[2] = ['1(F/G)', '1(F/G)', '2(E/F)', '2(E/F)', '3(D)', '3(D)'
                           '7(A)','8+(A*)','8+(A*)','8+(A*)','9(A*)','9(A*)',
                           '9(A*)','9(A*)', '9(A*)']
 //Y10 predicted GCSE grades
-gradesMatrixNumbers[3] = ['1(F/G)', '1(F/G)', '1(F/G)', '1(F/G)', '2(E/F)', '2(E/F)', 
-                          '2(E/F)', '3(D)', '3(D)', '3(D)', '4(C)', '4(C)', '4(C)',
-                          '5(B/C)', '5(B/C)', '6-(B)', '6-(B)','6-(B)','6-(B)', '7(A)',
-                          '7(A)', '7(A)', '7(A)', '8+(A*)','8+(A*)','9(A*)','9(A*)']
+gradesMatrixNumbers[3] = ['1+(F/G)', '2(E/F)', '2+(E/F)', '3-(E/F)', '3(D)', '3+(D)', 
+                          '4-(D)', '4(C)', '4+(C)', '5-(C)', '5(B/C)', '5+(B/C)', '5+(B/C)',
+                          '6-(B)', '6+(B)', '7(A)', '7+(A)','8-(A)','8(A)', '8+(A*)',
+                          '8+(A*)', '9-(A*)', '9-(A*)', '9(A*)','9(A*)','9+(A*)','9+(A*)']
 //Y11 don't need
+gradesMatrixNumbers[4] = ['1-(F/G)', '1(F/G)', '1+(F/G)', '2-(F/G)', '2(E/F)', '2+(E/F)', 
+                          '3-(E/F)', '3(D)', '3+(D)', '4-(D)', '4(C)', '4+(C)', '5-(C)',
+                          '5(B/C)', '5+(B/C)', '6-(B)', '6(B)','6+(B)','7-(B)', '7(A)',
+                          '7+(A)', '8-(A)', '8(A)', '8+(A*)','9-(A*)','9(A*)','9+(A*)']
 
 //helper function to correlate number grades as numbers for comparisons and
 //matrix
@@ -66,7 +70,6 @@ function predictedNumberGrade(year, grade) {
   var yearIndex = years.indexOf(year);
   return gradesMatrixNumbers[yearIndex][gradeIndex];
 }
-
 //*********************GRADE FORMAT: SUBLEVELS***********************
 //- The predicted grade for the subsequent year is simply two sublevels above
 
@@ -134,15 +137,15 @@ function convertPercentageToGCSEGrade(percentageY9) {
     return '1(F/G)';
   } else if (percentageAsInt <= 36) {
     return '2(E/F)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 56) {
     return '3(D)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 68) {
     return '4(C)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 76) {
     return '5(B/C)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 80) {
     return '6-(B)';
-  } else if (percentageAsInt <= 36) {
+  } else if (percentageAsInt <= 96) {
     return '7(A)';
   } else if (percentageAsInt > 96) {
     return '8+/9(A*)';
