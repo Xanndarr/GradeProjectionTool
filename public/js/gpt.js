@@ -127,13 +127,19 @@ function predictGrades(yearAsNum, targetGrade) {
   }
 }
 
+
 function predictNumbers(year, grade) {
 	let predictions = [];
-	while (year < 10) {
-		console.log(year);
+	if (year == 10) {
 		grade = predictedNumberGrade(year.toString(), grade);
 		predictions.push(grade);
-		year++;
+
+	} else {
+		while (year < 10) {
+			grade = predictedNumberGrade(year.toString(), grade);
+			predictions.push(grade);
+			year++;
+		}
 	}
 	return predictions;
 
