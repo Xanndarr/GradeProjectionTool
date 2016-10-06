@@ -4,21 +4,174 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>GradePredictionTool</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+        <link href="http://fonts.googleapis.com/css?family=ABeeZee:400,700" rel="stylesheet" type="text/css">
 
-        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/gpt.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        <div id="content">
+          <div class="header">
+            <h1>Grade prediction tool</h1>
+            <!--<img class="logo" src="http://www.futurefrontiers.org.uk/wp-content/themes/FutureFrontiers/images/LGB.png" alt="Future Frontiers logo"/>-->
+          </div>
 
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+          <div class="container">
+            <h2>Predictions</h2>
+            <div id="year7" class="table">
+              <h3>Year 7</h3>
+              <table>
+                <tr>
+                  <th>Subject</th>
+                  <th>Target Grade</th>
+                </tr>
+                <tr class="english">
+                  <td>English</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="maths">
+                  <td>Maths</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="science">
+                  <td>Science</td>
+                  <td class="targetData"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="year8" class="table">
+              <h3>Year 8</h3>
+              <table>
+                <tr>
+                  <th>Subject</th>
+                  <th>Target Grade</th>
+                </tr>
+                <tr class="english">
+                  <td>English</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="maths">
+                  <td>Maths</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="science">
+                  <td>Science</td>
+                  <td class="targetData"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="year9" class="table">
+              <table>
+                <h3>Year 9</h3>
+                <tr>
+                  <th>Subject</th>
+                  <th>Target Grade</th>
+                </tr>
+                <tr class="english">
+                  <td>English</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="maths">
+                  <td>Maths</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="science">
+                  <td>Science</td>
+                  <td class="targetData"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="year10" class="table">
+              <table>
+                <h3>Year 10</h3>
+                <tr>
+                  <th>Subject</th>
+                  <th>Target Grade</th>
+                </tr>
+                <tr class="english">
+                  <td>English</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="maths">
+                  <td>Maths</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="science">
+                  <td>Science</td>
+                  <td class="targetData"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="gcses" class="table">
+              <table>
+                <h3>GCSEs</h3>
+                <tr>
+                  <th>Subject</th>
+                  <th>Target Grade</th>
+                </tr>
+                <tr class="english">
+                  <td>English</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="maths">
+                  <td>Maths</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="science">
+                  <td>Science</td>
+                  <td class="targetData"></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="container">
+            <h2>Grade Entry/Control Panel</h2>
+            <div id="chooseYearDiv">
+              <select id="choose-year">
+                  <option value="choose">Choose Year Group</option>
+                  <option value="year7" onclick="y7showform()">Year 7</option>
+                  <option value="year8" onclick="y8showform()">Year 8</option>
+                  <option value="year9" onclick="y9showform()">Year 9</option>
+                  <option value="year10" onclick="y10showform()">Year 10</option>
+                  <option value="year11" onclick="y11showform()">Year 11</option>
+              </select>
+            </div>
+            <div id="gradeEntry" class="table">
+              <table>
+                <tr>
+                  <th>Subject</th>
+                  <th>Year target</th>
+                </tr>
+                <tr>
+                  <td>English</td>
+                  <td><input name="english" type="text" /></td>
+                </tr>
+                <tr>
+                  <td>Maths</td>
+                  <td><input name="maths" type="text" /></td>
+                </tr>
+                <tr>
+                  <td>Science</td>
+                  <td><input name="science" type="text" /></td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <button id="calcButton">Calculate</button>
+            </div>
+          </div>
+        </div>
+
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.1.min.js"><\/script>')</script>
+        <script src="js/gpt.js"></script>
     </body>
 </html>
