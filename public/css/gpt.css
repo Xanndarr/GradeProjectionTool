@@ -24,3 +24,9 @@ table, th, td {
 .table h3 {
   text-align: center;
 }
+
+.btn {
+	width: 20px;
+	margin: 0px;
+	padding: 0px;
+}

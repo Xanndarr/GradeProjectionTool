@@ -6,6 +6,8 @@
         <title>GradePredictionTool</title>
 
         <link href="http://fonts.googleapis.com/css?family=ABeeZee:400,700" rel="stylesheet" type="text/css">
+        <!-- So that we ca access the arrow glyphicons -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link rel="stylesheet" href="css/gpt.css">
         <link rel="stylesheet" href="css/main.css">
@@ -53,6 +55,7 @@
                 <tr>
                   <td>English</td>
                   <td><input name="english" type="text" /></td>
+
                 </tr>
                 <tr>
                   <td>Maths</td>
@@ -69,7 +72,7 @@
             </div>
           </div>
 
-          <div class="container">
+          <div class="container" id="predictions-container">
             <h2>Predictions</h2>
             <div id="year7" class="table">
               <h3>Year 7</h3>
@@ -169,14 +172,44 @@
                 <tr class="english">
                   <td>English</td>
                   <td class="targetData"></td>
+                  <td>
+                  <button type="button" class="btn btn-up">
+                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                  </button>
+                  </td>
+                  <td>
+                  <button type="button" class="btn btn-down">
+                    <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                  </button>
+                  </td>
                 </tr>
                 <tr class="maths">
                   <td>Maths</td>
                   <td class="targetData"></td>
+                  <td>
+                  <button type="button" class="btn btn-up">
+                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                  </button>
+                  </td>
+                  <td>
+                  <button type="button" class="btn btn-down">
+                    <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                  </button>
+                  </td>
                 </tr>
                 <tr class="science">
                   <td>Science</td>
                   <td class="targetData"></td>
+                  <td>
+                  <button type="button" class="btn btn-up">
+                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                  </button>
+                  </td>
+                  <td>
+                  <button type="button" class="btn btn-down">
+                    <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                  </button>
+                  </td>
                 </tr>
               </table>
             </div>

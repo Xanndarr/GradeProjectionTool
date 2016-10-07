@@ -12,21 +12,17 @@ $("#calcButton").click(function() {
   const rows = $("#gradeEntry").find("tr");
   rows.each(function(index, row) {
     const inputs = $(row).find("input");
-		console.log(row)
-		console.log(inputs.length)
     let subject = "null";
     let targetGrade;
     if (inputs.length) {
     	subject = inputs[0].name;
-			console.log('here')
     	targetGrade = inputs[0].value;
-			const dropdown = document.getElementById("choose-year");
+		
+		const dropdown = document.getElementById("choose-year");
 	    const yearGroup = dropdown.options[dropdown.selectedIndex].value;
 
 	    let yearAsNum = convertYearGroupToNum(yearGroup);
-			console.log(yearAsNum, targetGrade)
 	    let predictedGrades = predictGrades(yearAsNum, targetGrade);
-	    console.log(predictedGrades);
 
 	    //Set correlating year group box to predicted grade for that year
 			let formattedGrade = targetGrade;
@@ -47,6 +43,73 @@ $("#calcButton").click(function() {
     };
   });
 });
+
+$('#gcses').find('.btn-up').click( function(){
+	let subject = $(this).parent().parent().prop('className');
+	const rows = $("#predictions-container").find(`.${subject}`);
+	let currentGrade = $(rows[rows.length-1]).find('.targetData').text();
+	let gradeAbove = returnGradeAbove(currentGrade);
+	$(rows[rows.length-1]).find('.targetData').text(gradeAbove);
+
+	const gradeFormat = $('#chooseGradeDiv').find('select:visible')[0].value;
+
+	let projections = [];
+	switch(gradeFormat) {
+		case 'numbers':
+			projections = defaultProjectionsNumbers(gradeAbove);
+			break;
+		case 'letters':
+			projections = defaultProjectionsLetters(gradeAbove);
+			break;
+		case 'sublevels':
+			projections = defaultProjectionsSublevels(gradeAbove);
+			break;
+		case 'percentages':
+			projections = defaultProjectionsPercentages(gradeAbove);
+			break;	    		
+		default:
+			projections = ['ERROR'];
+	}
+
+	for (let i=0; i < rows.length-2; i++) {
+		$(rows[i]).find('.targetData').text(projections.shift());
+	}
+
+});
+
+$('#gcses').find('.btn-down').click( function(){
+	let subject = $(this).parent().parent().prop('className');
+	const rows = $("#predictions-container").find(`.${subject}`);
+	let currentGrade = $(rows[rows.length-1]).find('.targetData').text();
+	let gradeBelow = returnGradeBelow(currentGrade);
+	$(rows[rows.length-1]).find('.targetData').text(gradeBelow);
+
+	const gradeFormat = $('#chooseGradeDiv').find('select:visible')[0].value;
+
+	let projections = [];
+	switch(gradeFormat) {
+		case 'numbers':
+			projections = defaultProjectionsNumbers(gradeBelow);
+			break;
+		case 'letters':
+			projections = defaultProjectionsLetters(gradeBelow);
+			break;
+		case 'sublevels':
+			projections = defaultProjectionsSublevels(gradeBelow);
+			break;
+		case 'percentages':
+			projections = defaultProjectionsPercentages(gradeBelow);
+			break;	    		
+		default:
+			projections = ['ERROR'];
+	}
+
+	for (let i=0; i < rows.length-2; i++) {
+		$(rows[i]).find('.targetData').text(projections.shift());
+	}
+
+});
+
 
 function convertYearGroupToNum(yearGroup) {
 	let year;
@@ -198,7 +261,6 @@ $("#choose-year").change(function() {
 
 // Show relevant form fields for each year group
 function y7showform() {
-	console.log('y7')
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").show();
@@ -247,3 +309,4 @@ function y11showform() {
 	$("#year10").hide();
 	$("#gcses").show();
 }
+
