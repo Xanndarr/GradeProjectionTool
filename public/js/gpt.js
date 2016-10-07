@@ -17,7 +17,7 @@ $("#calcButton").click(function() {
     if (inputs.length) {
     	subject = inputs[0].name;
     	targetGrade = inputs[0].value;
-		
+
 		const dropdown = document.getElementById("choose-year");
 	    const yearGroup = dropdown.options[dropdown.selectedIndex].value;
 
@@ -42,6 +42,11 @@ $("#calcButton").click(function() {
 	   	$("#gcses").find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
     };
   });
+	$('html, body').animate({
+   scrollTop: $(document).height()-$(window).height()},
+   1000,
+   "swing"
+	);
 });
 
 $('#gcses').find('.btn-up').click( function(){
@@ -66,7 +71,7 @@ $('#gcses').find('.btn-up').click( function(){
 			break;
 		case 'percentages':
 			projections = defaultProjectionsPercentages(gradeAbove);
-			break;	    		
+			break;
 		default:
 			projections = ['ERROR'];
 	}
@@ -99,7 +104,7 @@ $('#gcses').find('.btn-down').click( function(){
 			break;
 		case 'percentages':
 			projections = defaultProjectionsPercentages(gradeBelow);
-			break;	    		
+			break;
 		default:
 			projections = ['ERROR'];
 	}
@@ -246,17 +251,23 @@ $("#choose-year").change(function() {
 	const year = dropdown[0].value;
 	switch (year) {
 		case "year7":
-			return y7showform();
+			y7showform();
+			break;
 		case "year8":
-			return y8showform();
+			y8showform();
+			break;
 		case "year9":
-			return y9showform();
+			y9showform();
+			break;
 		case "year10":
-			return y10showform();
+			y10showform();
+			break;
 		case "gcses":
-			return y11showform();
+			y11showform();
+			break;
 		default:
 	}
+	$("html").css("height", "initial");
 });
 
 // Show relevant form fields for each year group
@@ -309,4 +320,3 @@ function y11showform() {
 	$("#year10").hide();
 	$("#gcses").show();
 }
-

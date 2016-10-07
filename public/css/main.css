@@ -1,8 +1,5 @@
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  font-family: "ABeeZee", Helvetica, Arial, sans-serif;
+html {
+  height: 100%;
   background: #296092;
   background: -webkit-linear-gradient(#296092, #609bd2);
   /* For Safari 5.1 to 6.0 */
@@ -12,6 +9,13 @@ body {
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#296092, #609bd2);
   /* Standard syntax */
+}
+
+body {
+  width: 100vw;
+  margin: 0;
+  font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+  background-color: transparent;
 }
 
 h1 {
@@ -61,8 +65,10 @@ button:active {
 }
 
 .logo {
-  width: 155px;
-  height: 110px;
+  min-width: 100px;
+  width: 20%;
+  height: 20%;
+  padding-bottom: 15px;
 }
 
 #chooseYearDiv, #chooseGradeDiv {
