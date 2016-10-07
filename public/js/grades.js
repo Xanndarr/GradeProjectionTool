@@ -180,19 +180,19 @@ function defaultProjectionsNumbers(grade) {
 function defaultProjectionsPercentages(grade) {
   switch(grade) {
     case '2(E/F)':
-      return ['20','28','36'];
+      return ['20','28','36', ''];
     case '3(D)':
-      return ['40','48','56'];
+      return ['40','48','56', ''];
     case '4(C)':
-      return ['52','60','68'];
+      return ['52','60','68', ''];
     case '5(B/C)':
-      return ['60','68','76'];
+      return ['60','68','76', ''];
     case '6-(B)':
-      return ['64','72','80'];
+      return ['64','72','80', ''];
     case '7(A)':
-      return ['80','88','96'];
+      return ['80','88','96', ''];
     case '8+(A*)':
-      return ['84','92','96+'];
+      return ['84','92','96+', ''];
   }
 }
 
@@ -201,21 +201,21 @@ function defaultProjectionsPercentages(grade) {
 function defaultProjectionsSublevels(grade) {
   switch(grade) {
     case '2(E/F)':
-      return ['2b','3c','3a'];
+      return ['2b','3c','3a', ''];
     case '3(D)':
-      return ['4c','4a','5b'];
+      return ['4c','4a','5b', ''];
     case '4(C)':
-      return ['5c','5a','6b'];
+      return ['5c','5a','6b', ''];
     case '5(B/C)':
-      return ['5a','6b','7c'];
+      return ['5a','6b','7c', ''];
     case '6-(B)':
-      return ['6c','6a','7b'];
+      return ['6c','6a','7b', ''];
     case '7(A)':
-      return ['7b','8c','8a'];
+      return ['7b','8c','8a', ''];
     case '8+(A*)':
-      return ['7a','8b','8a+'];
+      return ['7a','8b','8a+', ''];
     case '9(A*)':
-      return ['7a','8a+','8a+'];
+      return ['7a','8a+','8a+', ''];
   }
 }
 
@@ -223,18 +223,36 @@ function defaultProjectionsSublevels(grade) {
 function defaultProjectionsLetters(grade) {
   switch(grade) {
     case '2(E/F)':
-      return 'F';
+      return ['F'];
     case '3(D)':
-      return 'E';
+      return ['E'];
     case '4(C)':
-      return 'D';
+      return ['D'];
     case '6-(B)':
-      return 'C';
+      return ['C'];
     case '7(A)':
-      return 'B';
+      return ['B'];
     case '8+(A*)':
-      return 'A';
+      return ['A'];
     case '9(A*)':
-      return 'A*';
+      return ['A*'];
   }
+}
+
+//- Returns the grade above or below the grade given
+const gradesArray = ['1(F/G)', '2(E/F)','3(D)','4(C)','5(B/C)','6-(B)','7(A)','8+(A*)','9(A*)']
+
+function returnGradeAbove(grade) {
+  let indexAbove = gradesArray.indexOf(grade);
+  if (indexAbove < gradesArray.indexOf('9(A*)')) {
+    indexAbove++;
+  }
+  return gradesArray[indexAbove];
+}
+function returnGradeBelow(grade) {
+  let indexBelow = gradesArray.indexOf(grade);
+  if (indexBelow > gradesArray.indexOf('1(F/G)')) {
+    indexBelow--;
+  }
+  return gradesArray[indexBelow];
 }
