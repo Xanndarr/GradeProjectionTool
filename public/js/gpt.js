@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 let error = 0;
 $("#calcButton").click(function() {
-	$('#error').html("");
+	$('.error').html("");
 	error = 0;
 	const rows = $("#gradeEntry").find("tr");
   	rows.each(function(index, row) {
@@ -88,7 +88,7 @@ $('#gcses').find('.btn-up').click( function(){
 			projections = defaultProjectionsPercentages(gradeAbove);
 			break;
 		default:
-			$('#error').html("There has been an error. Please try again.");
+			$('.error').html("There has been an error. Please try again.");
 			error = 1;
 	}
 
@@ -128,13 +128,13 @@ $('#gcses').find('.btn-down').click( function(){
 			projections = defaultProjectionsPercentages(gradeBelow);
 			break;
 		default:
-			$('#error').html("An unexpected error has occurred. Please try again.");
+			$('.error').html("An unexpected error has occurred. Please try again.");
 			error = 1;
 	}
 
 	const originalGCSEGrade = originalPredictions[originalPredictions.length - 1];
 	if (gradesArray.indexOf(gradeBelow) <= gradesArray.indexOf(originalGCSEGrade)) {
-		$('#error').html("Cannot reduce grade below value of your original target grade.");
+		$('.error').html("Cannot reduce grade below value of your original target grade.");
 		error = 1;
 		populateBoxes(yearGroup, originalTargetGrade, subject);
 	} else {
@@ -168,7 +168,7 @@ function convertYearGroupToNum(yearGroup) {
     	year = 11;
     	break;
     default:
-    	$('#error').html("An unexpected error has occurred. Please try again.");
+    	$('.error').html("An unexpected error has occurred. Please try again.");
     	error = 1;
     }
 
@@ -196,7 +196,7 @@ function convertNumToYearGroup(yearGroup) {
     	year = "gcses";
     	break;
     default:
-    	$('#error').html("An unexpected error has occurred. Please try again.");
+    	$('.error').html("An unexpected error has occurred. Please try again.");
     	error = 1;
     }
 
@@ -220,15 +220,15 @@ function predictGrades(yearAsNum, targetGrade) {
   switch(gradeFormat) {
   	case "numbers":
   		if (yearAsNum == 7 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('5+')) {
-  			$('#error').html("Highest target grade for year 7 is 5+.");
+  			$('.error').html("Highest target grade for year 7 is 5+.");
   			error = 1;
   			return;
   		} else if (yearAsNum == 8 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('8+')) {
-  			$('#error').html("Highest target grade for year 8 is 8+.");
+  			$('.error').html("Highest target grade for year 8 is 8+.");
   			error = 1;
   			return;
   		} else if (gradesNumbers.indexOf(targetGrade) == -1) {
-  			$('#error').html("One of your number grades is invalid.");
+  			$('.error').html("One of your number grades is invalid.");
   			error = 1;
   			return;
   		}
@@ -236,7 +236,7 @@ function predictGrades(yearAsNum, targetGrade) {
   		break;
   	case "sublevels":
   		if (sublevels.indexOf(targetGrade) == -1) {
-  			$('#error').html("One of your sublevel grades is invalid.");
+  			$('.error').html("One of your sublevel grades is invalid.");
   			error = 1;
   			return;
   		}
@@ -246,7 +246,7 @@ function predictGrades(yearAsNum, targetGrade) {
   		targetGrade = targetGrade.toUpperCase();
   		let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'U'];
   		if (letters.indexOf(targetGrade) == -1) {
-  			$('#error').html("One of your letter grades is invalid.");
+  			$('.error').html("One of your letter grades is invalid.");
   			error = 1;
   			return;
   		}
@@ -254,18 +254,18 @@ function predictGrades(yearAsNum, targetGrade) {
   		break;
   	case "percentages":
         if (isNaN(targetGrade)) {
-            $('#error').html("Please enter only numbers between 1 and 100.");
+            $('.error').html("Please enter only numbers between 1 and 100.");
             error = 1;
             return;
   	  	} else if ( 100 < targetGrade || targetGrade < 0) {
-  			$('#error').html("Please enter a number between 1 and 100.");
+  			$('.error').html("Please enter a number between 1 and 100.");
   			error = 1;
   			return;
   		}
   	    return predictPercentages(yearAsNum, targetGrade);
   		break;
   	default:
-  		$('#error').html("An unexpected error has occurred. Please try again.");
+  		$('.error').html("An unexpected error has occurred. Please try again.");
   		error = 1;
   }
 }

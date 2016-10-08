@@ -18,12 +18,12 @@
         <![endif]-->
         <div id="content">
           <div class="header">
-            <h1>Grade prediction tool</h1>
-            <img class="logo" src="http://www.futurefrontiers.org.uk/wp-content/themes/FutureFrontiers/images/LGB.png" alt="Future Frontiers logo"/>
+            <h1 class="faded-header">GRADE PREDICTION TOOL</h1>
           </div>
 
-          <div class="container">
-            <h2>Grade Entry/Control Panel</h2>
+          <div class="container" id="input-box">
+          <img class="logo" src="http://www.futurefrontiers.org.uk/wp-content/themes/FutureFrontiers/images/LGB.png" alt="Future Frontiers logo"/>
+            <h2 class="heading">Control Panel</h2>
             <div id="chooseYearDiv">
               <select id="choose-year" autocomplete="off">
                   <option value="choose" selected="selected" onclick="resetFields()">Choose Year Group</option>
@@ -68,7 +68,7 @@
               </table>
             </div>
             <div>
-                <p id="error"></p>
+                <p class="error"></p>
             </div>
             <div>
               <button id="calcButton">Calculate</button>
@@ -76,7 +76,7 @@
           </div>
 
           <div class="container" id="predictions-container">
-            <h2>Flight Path</h2>
+            <h2 class="heading">Flight Path</h2>
             <div id="year7" class="table">
               <h3>Year 7</h3>
               <table>
@@ -166,8 +166,8 @@
             </div>
 
             <div id="gcses" class="table">
-              <table>
-                <h3>GCSEs</h3>
+              <table class="borderless tablewithbuttons">
+                <h3 class="centerheader">GCSEs</h3>
                 <tr>
                   <th>Subject</th>
                   <th>Target Grade</th>
@@ -175,12 +175,12 @@
                 <tr class="english">
                   <td>English</td>
                   <td class="targetData"></td>
-                  <td>
+                  <td class="borderless buttoncell">
                   <button type="button" class="btn btn-up">
                     <span class="glyphicon glyphicon-circle-arrow-up"></span>
                   </button>
                   </td>
-                  <td>
+                  <td class="borderless buttoncell">
                   <button type="button" class="btn btn-down">
                     <span class="glyphicon glyphicon-circle-arrow-down"></span>
                   </button>
@@ -189,12 +189,12 @@
                 <tr class="maths">
                   <td>Maths</td>
                   <td class="targetData"></td>
-                  <td>
+                  <td class="borderless buttoncell">
                   <button type="button" class="btn btn-up">
                     <span class="glyphicon glyphicon-circle-arrow-up"></span>
                   </button>
                   </td>
-                  <td>
+                  <td class="borderless buttoncell">
                   <button type="button" class="btn btn-down">
                     <span class="glyphicon glyphicon-circle-arrow-down"></span>
                   </button>
@@ -203,18 +203,21 @@
                 <tr class="science">
                   <td>Science</td>
                   <td class="targetData"></td>
-                  <td>
+                  <td class="borderless buttoncell">
                   <button type="button" class="btn btn-up">
                     <span class="glyphicon glyphicon-circle-arrow-up"></span>
                   </button>
                   </td>
-                  <td>
+                  <td class="borderless buttoncell">
                   <button type="button" class="btn btn-down">
                     <span class="glyphicon glyphicon-circle-arrow-down"></span>
                   </button>
                   </td>
                 </tr>
               </table>
+            </div>
+            <div>
+                <p class="error"></p>
             </div>
           </div>
         </div>
