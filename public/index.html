@@ -25,25 +25,25 @@
           <div class="container">
             <h2>Grade Entry/Control Panel</h2>
             <div id="chooseYearDiv">
-              <select id="choose-year">
-                  <option value="choose">Choose Year Group</option>
+              <select id="choose-year" autocomplete="off">
+                  <option value="choose" selected="selected" onclick="resetFields()">Choose Year Group</option>
                   <option value="year7" onclick="y7showform()">Year 7</option>
                   <option value="year8" onclick="y8showform()">Year 8</option>
                   <option value="year9" onclick="y9showform()">Year 9</option>
                   <option value="year10" onclick="y10showform()">Year 10</option>
               </select>
             </div>
-            <div id="chooseGradeDiv">
+            <div id="chooseGradeDiv" autocomplete="off">
               <select id="choose-grade-format-ks4">
-                  <option value="choose-grade">Choose Grade Format</option>
-                  <option value="numbers">Numbers (1- to 9+)</option>
-                  <option value="letters">Letters (A* to U)</option>
+                  <option value="choose-grade" selected="selected" onclick="resetFields()">Choose Grade Format</option>
+                  <option value="numbers" onclick="resetFields()">Numbers (1- to 9+)</option>
+                  <option value="letters" onclick="resetFields()">Letters (A* to U)</option>
               </select>
-              <select id="choose-grade-format-ks3">
-                  <option value="choose-grade">Choose Grade Format</option>
-                  <option value="numbers">Numbers (1- to 9+)</option>
-                  <option value="percentages">Percentages (%)</option>
-                  <option value="sublevels">Sublevels (8a+ - 1c)</option>
+              <select id="choose-grade-format-ks3" autocomplete="off">
+                  <option value="choose-grade" selected="selected" onclick="resetFields()">Choose Grade Format</option>
+                  <option value="numbers" onclick="resetFields()">Numbers (1- to 9+)</option>
+                  <option value="percentages" onclick="resetFields()">Percentages (%)</option>
+                  <option value="sublevels" onclick="resetFields()">Sublevels (8a+ - 1c)</option>
               </select>
             </div>
             <div id="gradeEntry" class="table">

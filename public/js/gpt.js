@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').hide();
+    resetFields();
 	$('#year7').hide();
 	$('#year8').hide();
 	$('#year9').hide();
@@ -36,14 +37,9 @@ function populateBoxes(yearGroup, targetGrade, subject) {
 	let yearAsNum = convertYearGroupToNum(yearGroup);
 	let predictedGrades = predictGrades(yearAsNum, targetGrade);
    //Set correlating year group box to predicted grade for that year
-	let formattedGrade = targetGrade;
-
-	if ($("#choose-grade-format-ks3").is(":visible") && $("#choose-grade-format-ks3")[0].value === "percentages") {
-		formattedGrade = targetGrade + "%";
-	} 
 	
 	if (error == 0) {
-   		$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(formattedGrade);
+   		$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(formatGrade(targetGrade));
 	}
 
    	//Calculate predicted grades for subsequent years and populate form
@@ -56,6 +52,16 @@ function populateBoxes(yearGroup, targetGrade, subject) {
    	}
 
    	$("#gcses").find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
+}
+
+function formatGrade(grade) {
+    let formattedGrade = grade;
+    if ($("#choose-grade-format-ks3").is(":visible") && $("#choose-grade-format-ks3")[0].value === "percentages") {
+        formattedGrade = formattedGrade + "%";
+    } else if ($("#choose-grade-format-ks4").is(":visible") && $("#choose-grade-format-ks4")[0].value === "letters") {
+        formattedGrade = formattedGrade.toUpperCase();
+    }
+    return formattedGrade;
 }
 
 $('#gcses').find('.btn-up').click( function(){
@@ -87,7 +93,7 @@ $('#gcses').find('.btn-up').click( function(){
 	}
 
 	for (let i=0; i < rows.length-2; i++) {
-		$(rows[i]).find('.targetData').text(projections.shift());
+		$(rows[i]).find('.targetData').text(formatGrade(projections.shift()));
 	}
 
 });
@@ -134,7 +140,7 @@ $('#gcses').find('.btn-down').click( function(){
 	} else {
 		$(rows[rows.length-1]).find('.targetData').text(gradeBelow);
 		for (let i=0; i < rows.length-2; i++) {
-			$(rows[i]).find('.targetData').text(projections.shift());
+			$(rows[i]).find('.targetData').text(formatGrade(projections.shift()));
 		}
 	}
 
@@ -247,8 +253,12 @@ function predictGrades(yearAsNum, targetGrade) {
   	    return predictLetters(targetGrade);
   		break;
   	case "percentages":
-  	  	if ( 100 < targetGrade || targetGrade < 0) {
-  			$('#error').html("One of your percentage grades is invalid.");
+        if (isNaN(targetGrade)) {
+            $('#error').html("Please enter only numbers between 1 and 100.");
+            error = 1;
+            return;
+  	  	} else if ( 100 < targetGrade || targetGrade < 0) {
+  			$('#error').html("Please enter a number between 1 and 100.");
   			error = 1;
   			return;
   		}
@@ -331,8 +341,18 @@ $("#choose-year").change(function() {
 	$("html").css("height", "initial");
 });
 
+
+function resetFields() {
+    let inputs = $(document).find("input");
+    $('#predictions-container').find(".targetData").text("");
+    inputs.each(function(index, input) {
+        input.value='';
+    });
+}
+
 // Show relevant form fields for each year group
 function y7showform() {
+    resetFields();
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").show();
@@ -343,6 +363,7 @@ function y7showform() {
 }
 
 function y8showform() {
+    resetFields();
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").hide();
@@ -353,6 +374,7 @@ function y8showform() {
 }
 
 function y9showform() {
+    resetFields();
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").hide();
@@ -363,21 +385,12 @@ function y9showform() {
 }
 
 function y10showform() {
+    resetFields();
 	$('#choose-grade-format-ks3').hide();
 	$('#choose-grade-format-ks4').show();
 	$("#year7").hide();
 	$("#year8").hide();
 	$("#year9").hide();
 	$("#year10").show();
-	$("#gcses").show();
-}
-
-function y11showform() {
-	$('#choose-grade-format-ks3').hide();
-	$('#choose-grade-format-ks4').show();
-	$("#year7").hide();
-	$("#year8").hide();
-	$("#year9").hide();
-	$("#year10").hide();
 	$("#gcses").show();
 }
