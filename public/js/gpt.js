@@ -8,9 +8,12 @@ $(document).ready(function() {
 	$('#gcses').hide();
 });
 
+let error = 0;
 $("#calcButton").click(function() {
-  const rows = $("#gradeEntry").find("tr");
-  rows.each(function(index, row) {
+	$('#error').html("");
+	error = 0;
+	const rows = $("#gradeEntry").find("tr");
+  	rows.each(function(index, row) {
     const inputs = $(row).find("input");
     let subject = "null";
     let targetGrade;
@@ -37,8 +40,11 @@ function populateBoxes(yearGroup, targetGrade, subject) {
 
 	if ($("#choose-grade-format-ks3").is(":visible") && $("#choose-grade-format-ks3")[0].value === "percentages") {
 		formattedGrade = targetGrade + "%";
+	} 
+	
+	if (error == 0) {
+   		$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(formattedGrade);
 	}
-   	$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(formattedGrade);
 
    	//Calculate predicted grades for subsequent years and populate form
    	let yearCounter = yearAsNum;
@@ -76,7 +82,8 @@ $('#gcses').find('.btn-up').click( function(){
 			projections = defaultProjectionsPercentages(gradeAbove);
 			break;
 		default:
-			projections = ['ERROR'];
+			$('#error').html("There has been an error. Please try again.");
+			error = 1;
 	}
 
 	for (let i=0; i < rows.length-2; i++) {
@@ -115,11 +122,14 @@ $('#gcses').find('.btn-down').click( function(){
 			projections = defaultProjectionsPercentages(gradeBelow);
 			break;
 		default:
-			projections = ['ERROR'];
+			$('#error').html("An unexpected error has occurred. Please try again.");
+			error = 1;
 	}
 
 	const originalGCSEGrade = originalPredictions[originalPredictions.length - 1];
 	if (gradesArray.indexOf(gradeBelow) <= gradesArray.indexOf(originalGCSEGrade)) {
+		$('#error').html("Cannot reduce grade below value of your original target grade.");
+		error = 1;
 		populateBoxes(yearGroup, originalTargetGrade, subject);
 	} else {
 		$(rows[rows.length-1]).find('.targetData').text(gradeBelow);
@@ -152,7 +162,8 @@ function convertYearGroupToNum(yearGroup) {
     	year = 11;
     	break;
     default:
-    	console.log("year group invalid");
+    	$('#error').html("An unexpected error has occurred. Please try again.");
+    	error = 1;
     }
 
     return year;
@@ -179,7 +190,8 @@ function convertNumToYearGroup(yearGroup) {
     	year = "gcses";
     	break;
     default:
-    	console.log("number invalid");
+    	$('#error').html("An unexpected error has occurred. Please try again.");
+    	error = 1;
     }
 
     return year;
@@ -197,21 +209,54 @@ function predictGrades(yearAsNum, targetGrade) {
 
   const gradeFormat = dropdown.options[dropdown.selectedIndex].value;
 
+  targetGrade = targetGrade.trim();
+
   switch(gradeFormat) {
   	case "numbers":
+  		if (yearAsNum == 7 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('5+')) {
+  			$('#error').html("Highest target grade for year 7 is 5+.");
+  			error = 1;
+  			return;
+  		} else if (yearAsNum == 8 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('8+')) {
+  			$('#error').html("Highest target grade for year 8 is 8+.");
+  			error = 1;
+  			return;
+  		} else if (gradesNumbers.indexOf(targetGrade) == -1) {
+  			$('#error').html("One of your number grades is invalid.");
+  			error = 1;
+  			return;
+  		}
   		return predictNumbers(yearAsNum, targetGrade);
   		break;
   	case "sublevels":
+  		if (sublevels.indexOf(targetGrade) == -1) {
+  			$('#error').html("One of your sublevel grades is invalid.");
+  			error = 1;
+  			return;
+  		}
   	    return predictSublevels(yearAsNum, targetGrade);
   		break;
   	case "letters":
+  		targetGrade = targetGrade.toUpperCase();
+  		let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'U'];
+  		if (letters.indexOf(targetGrade) == -1) {
+  			$('#error').html("One of your letter grades is invalid.");
+  			error = 1;
+  			return;
+  		}
   	    return predictLetters(targetGrade);
   		break;
   	case "percentages":
+  	  	if ( 100 < targetGrade || targetGrade < 0) {
+  			$('#error').html("One of your percentage grades is invalid.");
+  			error = 1;
+  			return;
+  		}
   	    return predictPercentages(yearAsNum, targetGrade);
   		break;
   	default:
-  		console.log("grade format invalid");
+  		$('#error').html("An unexpected error has occurred. Please try again.");
+  		error = 1;
   }
 }
 

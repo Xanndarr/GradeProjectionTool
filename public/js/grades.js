@@ -35,7 +35,7 @@ gradesMatrixNumbers[0] = ['1','1+','1+','2','2+','3','4-','4-','4-','5','5','5+'
                           ,'6-','8','8'];
 //Y8 predicted grades for Y9
 gradesMatrixNumbers[1] = ['1','1+','2-','2','2+','3','3+','4+','5-','5','5+','6-'
-                          ,'6','6','6+','7','7+','8-','8-','8', '8+'];
+                          ,'6','6','6+','7','7+','8-','8-','8', '8+','8+', '9-', '9-'];
 //Y9 predicted GCSE grades
 gradesMatrixNumbers[2] = ['1(F/G)', '1(F/G)', '2(E/F)', '2(E/F)', '3(D)', '3(D)',
                           '3(D)', '4(C)', '4(C)', '4(C)', '5(B/C)', '5(B/C)',
@@ -55,10 +55,10 @@ gradesMatrixNumbers[4] = ['1-(F/G)', '1(F/G)', '1+(F/G)', '2-(F/G)', '2(E/F)', '
 
 //helper function to correlate number grades as numbers for comparisons and
 //matrix
-function numberGradesConvert(grade) {
-  const gradesNumbers = ['1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+',
+const gradesNumbers = ['1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+',
                        '5-','5','5+','6-','6','6+','7-','7','7+','8-','8','8+',
                        '9-','9','9+'];
+function numberGradesConvert(grade) {
   return gradesNumbers.indexOf(grade);
 }
 
