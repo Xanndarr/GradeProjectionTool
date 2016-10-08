@@ -6,6 +6,8 @@
 
 table {
   border-collapse: collapse;
+  margin: auto;
+  margin-bottom: 0px;
 }
 
 th {
@@ -27,6 +29,62 @@ table, th, td {
 
 .btn {
 	width: 20px;
+  height: 20px;
+  background:none;
 	margin: 0px;
 	padding: 0px;
+}
+
+.borderless {
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+}
+
+.centerheader {
+  width: 170px;
+}
+
+.tablewithbuttons {
+  width: 210px;
+}
+
+.buttoncell {
+  padding:0px;
+}
+
+.error {
+  color: red;
+}
+
+.faded-header {
+  font-weight: bold;
+  color: #609bd2;
+  text-align: center;
+  margin: 1% 25%;
+  opacity: 0.7;
+}
+
+.logo {
+  width: 100px;
+}
+
+#input-box {
+  width: 40%;
+  background-color: white;
+}
+
+.heading {
+  color: #296092;
+  font-weight:bold;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+}
+
+select {
+  width: 35%;
 }
