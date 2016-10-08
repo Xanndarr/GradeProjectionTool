@@ -1,12 +1,5 @@
 $(document).ready(function() {
-	$('#choose-grade-format-ks4').hide();
-	$('#choose-grade-format-ks3').hide();
-    resetFields();
-	$('#year7').hide();
-	$('#year8').hide();
-	$('#year9').hide();
-	$('#year10').hide();
-	$('#gcses').hide();
+	resetAllFields();
 });
 
 let error = 0;
@@ -348,6 +341,17 @@ function resetFields() {
     inputs.each(function(index, input) {
         input.value='';
     });
+}
+
+function resetAllFields() {
+    $('#choose-grade-format-ks4').hide();
+	$('#choose-grade-format-ks3').hide();
+    resetFields();
+	$('#year7').hide();
+	$('#year8').hide();
+	$('#year9').hide();
+	$('#year10').hide();
+	$('#gcses').hide();
 }
 
 // Show relevant form fields for each year group
