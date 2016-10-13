@@ -88,3 +88,54 @@ input {
 select {
   width: 35%;
 }
+
+.glyphicon-info-sign {
+  font-size: 15px;
+  color: black;
+}
+
+/*Tooltip css*/
+.info {
+    position: relative;
+    display: inline-block;
+}
+
+.info .info-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    font-weight:normal;
+    padding: 5px 10px;
+    font-size:14px;
+    top: 10px;
+    left: 140%;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.info:hover .info-text {
+    visibility: visible;
+}
+
+.info-header {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #eebc29;
+}
+
+.info-body {
+  text-align: left;
+}
+
+ul {
+  padding: 0px 20px;
+  margin:0px;
+}
+
+p {
+  margin: 0px;
+}

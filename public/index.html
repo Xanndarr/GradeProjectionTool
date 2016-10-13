@@ -18,12 +18,27 @@
         <![endif]-->
         <div id="content">
           <div class="header">
-            <h1 class="faded-header">GRADE PREDICTION TOOL</h1>
+            <h1 class="faded-header">FLIGHT PATH TOOL</h1>
           </div>
 
           <div class="container" id="input-box">
           <img class="logo" src="http://www.futurefrontiers.org.uk/wp-content/themes/FutureFrontiers/images/LGB.png" alt="Future Frontiers logo"/>
-            <h2 class="heading">Control Panel</h2>
+            <h2 class="heading">Control Panel <div class="info"><span class="glyphicon glyphicon-info-sign"></span>
+                                                <span class="info-text">
+                                                  <p class="info-header">Welcome to the Flight Path Tool!</p>
+
+                                                  <span class="info-body">
+                                                  <p>It's simple to get started:</p>
+                                                  <ul>
+                                                    <li>Select your year group</li>
+                                                    <li>Select your grade format</li>
+                                                    <li>Enter your target grades</li>
+                                                    <li>Press 'Calculate'</li>
+                                                  </ul>
+                                                  <p>Watch as your predicted grades are calculated, all the way through to GCSE!
+                                                  </p>
+                                                </span>
+                                              </div></h2>
             <div id="chooseYearDiv">
               <select id="choose-year" autocomplete="off">
                   <option value="choose" selected="selected" onclick="resetAllFields()">Choose Year Group</option>
@@ -76,7 +91,16 @@
           </div>
 
           <div class="container" id="predictions-container">
-            <h2 class="heading">Flight Path</h2>
+            <h2 class="heading">Flight Path <div class="info"><span class="glyphicon glyphicon-info-sign"></span>
+                                                <span class="info-text"><p class="info-header">Your predicted Grades</p>
+                                                <span class="info-body">
+                                                <ul>
+                                                <li>Below are all of your predicted grades from the end of your current year to the end of year 11.<br></li>
+                                                <li>If you think you can do better, use the arrow buttons (<span class="glyphicon glyphicon-circle-arrow-up"></span> and <span class="glyphicon glyphicon-circle-arrow-down"></span>) to alter you GCSE target grade.<br></li>
+                                                <li>Upon changing this grade, the rest of the page will update to show you your new target grades.</li>
+                                                </ul>
+                                                </span>
+                                              </div></h2>
             <div id="year7" class="table">
               <h3>Year 7</h3>
               <table>
