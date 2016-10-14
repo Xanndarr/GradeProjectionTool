@@ -103,11 +103,12 @@ select {
 .info .info-text {
     visibility: hidden;
     width: 250px;
-    background-color: black;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
     text-align: center;
+    border: 1px solid black;
     border-radius: 6px;
-    font-weight:normal;
+    font-weight: normal;
     padding: 5px 10px;
     font-size:14px;
     top: 10px;
@@ -124,7 +125,7 @@ select {
 .info-header {
   margin-bottom: 5px;
   font-weight: bold;
-  color: #eebc29;
+  color: #296092;
 }
 
 .info-body {
