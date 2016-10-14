@@ -140,3 +140,7 @@ ul {
 p {
   margin: 0px;
 }
+
+.error {
+  height: 15px;
+}

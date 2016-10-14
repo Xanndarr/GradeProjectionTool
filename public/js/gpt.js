@@ -58,6 +58,8 @@ function formatGrade(grade) {
 }
 
 $('#gcses').find('.btn-up').click( function(){
+	$('.error').html("");
+	error = 0;
 	let subject = $(this).parent().parent().prop('className');
 	const rows = $("#predictions-container").find(`.${subject}`);
 	let currentGrade = $(rows[rows.length-1]).find('.targetData').text();
@@ -98,7 +100,6 @@ $('#gcses').find('.btn-down').click( function(){
 	const yearGroup = $('#choose-year')[0].value;
 
 	let originalPredictions = predictGrades(convertYearGroupToNum(yearGroup), originalTargetGrade);
-
 	const rows = $("#predictions-container").find(`.${subject}`);
 
 	let currentGrade = $(rows[rows.length-1]).find('.targetData').text();
@@ -126,9 +127,10 @@ $('#gcses').find('.btn-down').click( function(){
 	}
 
 	const originalGCSEGrade = originalPredictions[originalPredictions.length - 1];
-	if (gradesArray.indexOf(gradeBelow) <= gradesArray.indexOf(originalGCSEGrade)) {
+	if (gradesArray.indexOf(gradeBelow) < gradesArray.indexOf(originalGCSEGrade)) {
 		$('.error').html("Cannot reduce grade below value of your original target grade.");
 		error = 1;
+	} else if (gradesArray.indexOf(gradeBelow) == gradesArray.indexOf(originalGCSEGrade)) {
 		populateBoxes(yearGroup, originalTargetGrade, subject);
 	} else {
 		$(rows[rows.length-1]).find('.targetData').text(gradeBelow);
