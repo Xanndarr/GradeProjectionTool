@@ -100,9 +100,6 @@ $('#gcses').find('.btn-down').click( function(){
 	const yearGroup = $('#choose-year')[0].value;
 
 	let originalPredictions = predictGrades(convertYearGroupToNum(yearGroup), originalTargetGrade);
-	console.log(originalTargetGrade);
-	console.log(convertYearGroupToNum(yearGroup));
-	console.log(predictGrades(convertYearGroupToNum(yearGroup), originalTargetGrade));
 	const rows = $("#predictions-container").find(`.${subject}`);
 
 	let currentGrade = $(rows[rows.length-1]).find('.targetData').text();
@@ -130,7 +127,6 @@ $('#gcses').find('.btn-down').click( function(){
 	}
 
 	const originalGCSEGrade = originalPredictions[originalPredictions.length - 1];
-	console.log("array: " + originalPredictions + " gradeBelow " + gradeBelow + " originalGCSEGrade " + originalGCSEGrade);
 	if (gradesArray.indexOf(gradeBelow) < gradesArray.indexOf(originalGCSEGrade)) {
 		$('.error').html("Cannot reduce grade below value of your original target grade.");
 		error = 1;
