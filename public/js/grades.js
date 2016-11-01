@@ -28,7 +28,7 @@ function predictedGCSEGradeY10Letter(letterGrade) {
 //- Create a matrix where each row correlates to Y7-10
 //- Each column correlates to a number grade 1- to 9+
 //- A cell of row 0 (Y7), column 2 (grade 1+) would return the Y8 predicted grade
-//should their progress remain the same. 
+//should their progress remain the same.
 const gradesMatrixNumbers = new Array(5);
 //Y7 predicted grades for Y8
 gradesMatrixNumbers[0] = ['1','1+','1+','2','2+','3','4-','4-','4-','5','5','5+'
@@ -43,12 +43,12 @@ gradesMatrixNumbers[2] = ['1(F/G)', '1(F/G)', '2(E/F)', '2(E/F)', '3(D)', '3(D)'
                           '7(A)','8+(A*)','8+(A*)','8+(A*)','9(A*)','9(A*)',
                           '9(A*)','9(A*)', '9(A*)']
 //Y10 predicted GCSE grades
-gradesMatrixNumbers[3] = ['1+(F/G)', '2(E/F)', '2+(E/F)', '3-(E/F)', '3(D)', '3+(D)', 
+gradesMatrixNumbers[3] = ['1+(F/G)', '2(E/F)', '2+(E/F)', '3-(E/F)', '3(D)', '3+(D)',
                           '4-(D)', '4(C)', '4+(C)', '5-(C)', '5(B/C)', '5+(B/C)', '5+(B/C)',
                           '6-(B)', '6+(B)', '7(A)', '7+(A)','8-(A)','8(A)', '8+(A*)',
                           '8+(A*)', '9-(A*)', '9-(A*)', '9(A*)','9(A*)','9+(A*)','9+(A*)']
-//Y11 don't need
-gradesMatrixNumbers[4] = ['1-(F/G)', '1(F/G)', '1+(F/G)', '2-(F/G)', '2(E/F)', '2+(E/F)', 
+//Y11
+gradesMatrixNumbers[4] = ['1-(F/G)', '1(F/G)', '1+(F/G)', '2-(F/G)', '2(E/F)', '2+(E/F)',
                           '3-(E/F)', '3(D)', '3+(D)', '4-(D)', '4(C)', '4+(C)', '5-(C)',
                           '5(B/C)', '5+(B/C)', '6-(B)', '6(B)','6+(B)','7-(B)', '7(A)',
                           '7+(A)', '8-(A)', '8(A)', '8+(A*)','9-(A*)','9(A*)','9+(A*)']
@@ -65,7 +65,7 @@ function numberGradesConvert(grade) {
 //takes the students year and their grade and outputs their predicted grades for
 //the next year
 function predictedNumberGrade(year, grade) {
-  const years = ['7', '8', '9', '10'];
+  const years = ['7', '8', '9', '10', '11'];
   var gradeIndex = numberGradesConvert(grade);
   var yearIndex = years.indexOf(year);
   return gradesMatrixNumbers[yearIndex][gradeIndex];
@@ -73,9 +73,9 @@ function predictedNumberGrade(year, grade) {
 //*********************GRADE FORMAT: SUBLEVELS***********************
 //- The predicted grade for the subsequent year is simply two sublevels above
 
-//Create array of all sublevels 
-const sublevels = ['1c', '1b','1a', '2c','2b','2a', '3c', '3b','3a', '4c','4b','4a', 
-                   '5c', '5b','5a', '6c','6b','6a', '7c','7b','7a', '8c', '8b','8a', 
+//Create array of all sublevels
+const sublevels = ['1c', '1b','1a', '2c','2b','2a', '3c', '3b','3a', '4c','4b','4a',
+                   '5c', '5b','5a', '6c','6b','6a', '7c','7b','7a', '8c', '8b','8a',
                    '8a+']
 
 //Find two levels above and return it(Y7,8,9)
@@ -119,7 +119,7 @@ function convertSublevelToGCSEGrade(sublevelY9) {
 //***************GRADE FORMAT: PERCENTAGES*************************
 //- The predicted percentage for subsequent year is 8% above
 
-//- Use to predict percentages for Y7,8,9 
+//- Use to predict percentages for Y7,8,9
 function predictedPercentageGrade(percentage) {
   var gradeAsInt = parseInt(percentage)
   var predictedGrade = gradeAsInt + 8;
@@ -153,8 +153,8 @@ function convertPercentageToGCSEGrade(percentageY9) {
     return 'INVALID';
   }
 }
- 
-//- Returns the array of projections of target number grades from Y7-10 to achieve 
+
+//- Returns the array of projections of target number grades from Y7-10 to achieve
 //specified grade
 function defaultProjectionsNumbers(grade) {
   switch(grade) {
@@ -175,7 +175,7 @@ function defaultProjectionsNumbers(grade) {
   }
 }
 
-//- Returns the array of projections of target percentage grades from Y7-9 to 
+//- Returns the array of projections of target percentage grades from Y7-9 to
 //achieve specified grade
 function defaultProjectionsPercentages(grade) {
   switch(grade) {
@@ -196,7 +196,7 @@ function defaultProjectionsPercentages(grade) {
   }
 }
 
-//- Returns the array of projections of target sublevel grades from Y7-9 to 
+//- Returns the array of projections of target sublevel grades from Y7-9 to
 //achieve specified grade
 function defaultProjectionsSublevels(grade) {
   switch(grade) {

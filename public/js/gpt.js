@@ -29,10 +29,15 @@ $("#calcButton").click(function() {
 function populateBoxes(yearGroup, targetGrade, subject) {
 	let yearAsNum = convertYearGroupToNum(yearGroup);
 	let predictedGrades = predictGrades(yearAsNum, targetGrade);
+	console.log(predictedGrades[0]);
    //Set correlating year group box to predicted grade for that year
 
 	if (error == 0) {
+		if (yearAsNum == 11) {
+			$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(predictedGrades.shift());
+		} else {
    		$(`#${yearGroup}`).find(`.${subject}`).find('.targetData').text(formatGrade(targetGrade));
+		}
 	}
 
    	//Calculate predicted grades for subsequent years and populate form
@@ -214,7 +219,7 @@ function predictGrades(yearAsNum, targetGrade) {
 	let dropdown;
 
 	if (yearAsNum == 10 || yearAsNum == 11) {
-    	dropdown = document.getElementById("choose-grade-format-ks4");
+    dropdown = document.getElementById("choose-grade-format-ks4");
 	} else {
 		dropdown = document.getElementById("choose-grade-format-ks3");
 	}
@@ -260,13 +265,13 @@ function predictGrades(yearAsNum, targetGrade) {
   		break;
   	case "percentages":
         if (isNaN(targetGrade)) {
-            $('.error').html("Please enter only numbers between 1 and 100.");
-            error = 1;
-            return;
+          $('.error').html("Please enter only numbers between 1 and 100.");
+          error = 1;
+          return;
   	  	} else if ( 100 < targetGrade || targetGrade < 0) {
-  			$('.error').html("Please enter a number between 1 and 100.");
-  			error = 1;
-  			return;
+  				$('.error').html("Please enter a number between 1 and 100.");
+  				error = 1;
+  				return;
   		}
   	    return predictPercentages(yearAsNum, targetGrade);
   		break;
@@ -279,10 +284,9 @@ function predictGrades(yearAsNum, targetGrade) {
 
 function predictNumbers(year, grade) {
 	let predictions = [];
-	if (year == 10) {
+	if (year == 10 || year == 11) {
 		grade = predictedNumberGrade(year.toString(), grade);
 		predictions.push(grade);
-
 	} else {
 		while (year < 10) {
 			grade = predictedNumberGrade(year.toString(), grade);
@@ -357,9 +361,10 @@ function resetFields() {
 }
 
 function resetAllFields() {
-    $('#choose-grade-format-ks4').hide();
+  $('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').hide();
-    resetFields();
+  resetFields();
+	$('.error').html("");
 	$('#year7').hide();
 	$('#year8').hide();
 	$('#year9').hide();
@@ -369,7 +374,8 @@ function resetAllFields() {
 
 // Show relevant form fields for each year group
 function y7showform() {
-    resetFields();
+  resetFields();
+	$('.error').html("");
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").show();
@@ -380,7 +386,8 @@ function y7showform() {
 }
 
 function y8showform() {
-    resetFields();
+  resetFields();
+	$('.error').html("");
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").hide();
@@ -391,7 +398,8 @@ function y8showform() {
 }
 
 function y9showform() {
-    resetFields();
+  resetFields();
+	$('.error').html("");
 	$('#choose-grade-format-ks4').hide();
 	$('#choose-grade-format-ks3').show();
 	$("#year7").hide();
@@ -402,12 +410,25 @@ function y9showform() {
 }
 
 function y10showform() {
-    resetFields();
+  resetFields();
+	$('.error').html("");
 	$('#choose-grade-format-ks3').hide();
 	$('#choose-grade-format-ks4').show();
 	$("#year7").hide();
 	$("#year8").hide();
 	$("#year9").hide();
 	$("#year10").show();
+	$("#gcses").show();
+}
+
+function y11showform() {
+  resetFields();
+	$('.error').html("");
+	$('#choose-grade-format-ks3').hide();
+	$('#choose-grade-format-ks4').show();
+	$("#year7").hide();
+	$("#year8").hide();
+	$("#year9").hide();
+	$("#year10").hide();
 	$("#gcses").show();
 }
