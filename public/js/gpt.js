@@ -94,7 +94,7 @@ $('#gcses').find('.btn-up').click( function(){
 
 	let year = $("#choose-year")[0].value;
 	console.log(year);
-	if (year = 'year10') {
+	if (year === 'year10') {
 		$(rows[3]).find('.targetData').text(formatGrade(projections.pop()));
 	} else {
 		for (let i=0; i < rows.length-2; i++) {
@@ -146,7 +146,7 @@ $('#gcses').find('.btn-down').click( function(){
 	} else {
 		$(rows[rows.length-1]).find('.targetData').text(gradeBelow);
 		let year = $("#choose-year")[0].value;
-		if (year = 'year10') {
+		if (year === 'year10') {
 			$(rows[3]).find('.targetData').text(formatGrade(projections.pop()));
 		} else {
 			for (let i=0; i < rows.length-2; i++) {
