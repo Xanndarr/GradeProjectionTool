@@ -255,7 +255,7 @@ function predictGrades(yearAsNum, targetGrade) {
   		break;
   	case "letters":
   		targetGrade = targetGrade.toUpperCase();
-  		let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'U'];
+  		let letters = ['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'U'];
   		if (letters.indexOf(targetGrade) == -1) {
   			$('.error').html("One of your letter grades is invalid.");
   			error = 1;
