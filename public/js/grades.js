@@ -1,8 +1,8 @@
-//************************GRADE FORMAT: LETTERS (Y10 ONLY)******************
-//- Y10's may be given a predicted letter grade for the end of the year
+//*******************************GRADE FORMAT: varTERS (Y10 ONLY)******************
+//- Y10's may be given a predicted varter grade for the end of the year
 
-function predictedGCSEGradeY10Letter(letterGrade) {
-  switch(letterGrade) {
+function predictedGCSEGradeY10varter(varterGrade) {
+  switch(varterGrade) {
     case 'U':
       return'1(F/G)';
     case 'G':
@@ -29,7 +29,7 @@ function predictedGCSEGradeY10Letter(letterGrade) {
 //- Each column correlates to a number grade 1- to 9+
 //- A cell of row 0 (Y7), column 2 (grade 1+) would return the Y8 predicted grade
 //should their progress remain the same.
-const gradesMatrixNumbers = new Array(5);
+var gradesMatrixNumbers = new Array(5);
 //Y7 predicted grades for Y8
 gradesMatrixNumbers[0] = ['1','1+','1+','2','2+','3','4-','4-','4-','5','5','5+'
                           ,'6-','8','8'];
@@ -55,7 +55,7 @@ gradesMatrixNumbers[4] = ['1-(F/G)', '1(F/G)', '1+(F/G)', '2-(F/G)', '2(E/F)', '
 
 //helper function to correlate number grades as numbers for comparisons and
 //matrix
-const gradesNumbers = ['1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+',
+var gradesNumbers = ['1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+',
                        '5-','5','5+','6-','6','6+','7-','7','7+','8-','8','8+',
                        '9-','9','9+'];
 function numberGradesConvert(grade) {
@@ -65,7 +65,7 @@ function numberGradesConvert(grade) {
 //takes the students year and their grade and outputs their predicted grades for
 //the next year
 function predictedNumberGrade(year, grade) {
-  const years = ['7', '8', '9', '10', '11'];
+  var years = ['7', '8', '9', '10', '11'];
   var gradeIndex = numberGradesConvert(grade);
   var yearIndex = years.indexOf(year);
   return gradesMatrixNumbers[yearIndex][gradeIndex];
@@ -74,7 +74,7 @@ function predictedNumberGrade(year, grade) {
 //- The predicted grade for the subsequent year is simply two sublevels above
 
 //Create array of all sublevels
-const sublevels = ['1c', '1b','1a', '2c','2b','2a', '3c', '3b','3a', '4c','4b','4a',
+var sublevels = ['1c', '1b','1a', '2c','2b','2a', '3c', '3b','3a', '4c','4b','4a',
                    '5c', '5b','5a', '6c','6b','6a', '7c','7b','7a', '8c', '8b','8a',
                    '8a+']
 
@@ -219,8 +219,8 @@ function defaultProjectionsSublevels(grade) {
   }
 }
 
-//- Returns the target letter grade for Y10 to achieve specified Y11 grade
-function defaultProjectionsLetters(grade) {
+//- Returns the target varter grade for Y10 to achieve specified Y11 grade
+function defaultProjectionsvarters(grade) {
   switch(grade) {
     case '2(E/F)':
       return ['F'];
@@ -240,17 +240,17 @@ function defaultProjectionsLetters(grade) {
 }
 
 //- Returns the grade above or below the grade given
-const gradesArray = ['1(F/G)', '2(E/F)','3(D)','4(C)','5(B/C)','6-(B)','7(A)','8+(A*)','9(A*)']
+var gradesArray = ['1(F/G)', '2(E/F)','3(D)','4(C)','5(B/C)','6-(B)','7(A)','8+(A*)','9(A*)']
 
 function returnGradeAbove(grade) {
-  let indexAbove = gradesArray.indexOf(grade);
+  var indexAbove = gradesArray.indexOf(grade);
   if (indexAbove < gradesArray.indexOf('9(A*)')) {
     indexAbove++;
   }
   return gradesArray[indexAbove];
 }
 function returnGradeBelow(grade) {
-  let indexBelow = gradesArray.indexOf(grade);
+  var indexBelow = gradesArray.indexOf(grade);
   if (indexBelow > gradesArray.indexOf('1(F/G)')) {
     indexBelow--;
   }
