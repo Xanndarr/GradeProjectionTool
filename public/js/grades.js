@@ -1,7 +1,7 @@
-//*******************************GRADE FORMAT: LETTERS (Y10 ONLY)******************
-//- Y10's may be given a predicted letter grade for the end of the year
+//*******************************GRADE FORMAT: LETTERS (Y10&Y11 ONLY)******************
+//- Y10's+Y11's may be given a predicted letter grade for the end of the year
 
-function predictedGCSEGradeY10Letter(letterGrade) {
+function predictedGCSEGradeLetter(letterGrade) {
   switch(letterGrade) {
     case 'U':
       return'1(F/G)';

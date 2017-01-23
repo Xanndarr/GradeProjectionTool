@@ -29,7 +29,6 @@ $("#calcButton").click(function() {
 function populateBoxes(yearGroup, targetGrade, subject) {
 	var yearAsNum = convertYearGroupToNum(yearGroup);
 	var predictedGrades = predictGrades(yearAsNum, targetGrade);
-	console.log(predictedGrades[0]);
    //Set correlating year group box to predicted grade for that year
 
 	if (error == 0) {
@@ -93,7 +92,6 @@ $('#gcses').find('.btn-up').click( function(){
 	}
 
 	var year = $("#choose-year")[0].value;
-	console.log(year);
 	if (year === 'year10') {
 		$(rows[3]).find('.targetData').text(formatGrade(projections.pop()));
 	} else {
@@ -322,7 +320,7 @@ function predictPercentages(year, grade) {
 //year10 only
 function predictLetters(grade) {
 	var predictions = [];
-	predictions.push(predictedGCSEGradeY10Letter(grade));
+	predictions.push(predictedGCSEGradeLetter(grade));
 	return predictions;
 }
 
