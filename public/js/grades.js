@@ -1,8 +1,8 @@
-//*******************************GRADE FORMAT: varTERS (Y10 ONLY)******************
-//- Y10's may be given a predicted varter grade for the end of the year
+//*******************************GRADE FORMAT: LETTERS (Y10 ONLY)******************
+//- Y10's may be given a predicted letter grade for the end of the year
 
-function predictedGCSEGradeY10varter(varterGrade) {
-  switch(varterGrade) {
+function predictedGCSEGradeY10Letter(letterGrade) {
+  switch(letterGrade) {
     case 'U':
       return'1(F/G)';
     case 'G':
@@ -219,8 +219,8 @@ function defaultProjectionsSublevels(grade) {
   }
 }
 
-//- Returns the target varter grade for Y10 to achieve specified Y11 grade
-function defaultProjectionsvarters(grade) {
+//- Returns the target letter grade for Y10 to achieve specified Y11 grade
+function defaultProjectionsLetters(grade) {
   switch(grade) {
     case '2(E/F)':
       return ['F'];

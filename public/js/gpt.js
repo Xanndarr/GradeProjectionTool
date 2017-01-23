@@ -34,9 +34,9 @@ function populateBoxes(yearGroup, targetGrade, subject) {
 
 	if (error == 0) {
 		if (yearAsNum == 11) {
-			$("" + yearGroup).find("" + subject).find('.targetData').text(predictedGrades.shift());
+			$("#" + yearGroup).find("." + subject ).find('.targetData').text(predictedGrades.shift());
 		} else {
-   		$("" + yearGroup).find("" + subject).find('.targetData').text(formatGrade(targetGrade));
+   		$("#" + yearGroup).find("." + subject).find('.targetData').text(formatGrade(targetGrade));
 		}
 	}
 
@@ -46,10 +46,10 @@ function populateBoxes(yearGroup, targetGrade, subject) {
    	while (predictedGrades.length > 1) {
    		yearCounter++;
    		var newYearGroup = convertNumToYearGroup(yearCounter);
-   		$("" +newYearGroup).find("" + subject).find('.targetData').text(predictedGrades.shift());
+   		$("#" + newYearGroup).find("." + subject).find('.targetData').text(predictedGrades.shift());
    	}
 
-   	$("#gcses").find("" + subject).find('.targetData').text(predictedGrades.shift());
+   	$("#gcses").find("." + subject).find('.targetData').text(predictedGrades.shift());
 }
 
 function formatGrade(grade) {
@@ -66,7 +66,7 @@ $('#gcses').find('.btn-up').click( function(){
 	$('.error').html("");
 	error = 0;
 	var subject = $(this).parent().parent().prop('className');
-	var rows = $("#predictions-container").find("" + subject);
+	var rows = $("#predictions-container").find("." + subject);
 	var currentGrade = $(rows[rows.length-1]).find('.targetData').text();
 	var gradeAbove = returnGradeAbove(currentGrade);
 	$(rows[rows.length-1]).find('.targetData').text(gradeAbove);
@@ -99,19 +99,19 @@ $('#gcses').find('.btn-up').click( function(){
 	} else {
 		for (var i=0; i < rows.length-2; i++) {
 			$(rows[i]).find('.targetData').text(formatGrade(projections.shift()));
-		}
+		} 
 	}
 
 });
 
 $('#gcses').find('.btn-down').click( function(){
 	var subject = $(this).parent().parent().prop('className');
-	var originalTargetGrade = $('#gradeEntry').find('input[name=" + subject + "]')[0].value;
+	var originalTargetGrade = $('#gradeEntry').find('input[name=" + subject +"]')[0].value;
 
 	var yearGroup = $('#choose-year')[0].value;
 
 	var originalPredictions = predictGrades(convertYearGroupToNum(yearGroup), originalTargetGrade);
-	var rows = $("#predictions-container").find("" + subject);
+	var rows = $("#predictions-container").find("." + subject);
 
 	var currentGrade = $(rows[rows.length-1]).find('.targetData').text();
 	var gradeBelow = returnGradeBelow(currentGrade);
