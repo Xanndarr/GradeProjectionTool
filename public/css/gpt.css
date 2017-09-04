@@ -1,30 +1,39 @@
-.table {
-  display: inline-block;
-  width: 200px;
-  text-align: left;
-}
-
 table {
-  border-collapse: collapse;
+  width:100%;
+  border-collapse: separate !important;
+  border-spacing: 0;
   margin: auto;
   margin-bottom: 0px;
+  border-collapse: collapse;
+  border-radius: 10px;
+  border-style: hidden; /* hide standard table (collapsed) border */
+  box-shadow: 0 0 0 1px #666; /* this draws the table border  */ 
 }
 
-th {
-  padding: 5px;
-  font-weight: bold;
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 
 td {
-  padding: 2px 5px;
+  padding: 0px 5px;
+  width: 50%;
 }
 
-table, th, td {
-  border: 1px solid black;
+tr {
+  height: 35px;
 }
 
-.table h3 {
-  text-align: center;
+ul {
+  padding: 0px 20px;
+  margin:0px;
+}
+
+p {
+  margin: 0px;
 }
 
 .btn {
@@ -46,14 +55,6 @@ table, th, td {
   width: 170px;
 }
 
-.tablewithbuttons {
-  width: 210px;
-}
-
-.buttoncell {
-  padding:0px;
-}
-
 .error {
   color: red;
   height: 35px;
@@ -72,7 +73,6 @@ table, th, td {
 }
 
 #input-box {
-  width: 40%;
   background-color: white;
 }
 
@@ -80,19 +80,6 @@ table, th, td {
   color: #296092;
   font-weight:bold;
   margin-bottom: 20px;
-}
-
-input {
-  width: 100%;
-}
-
-select {
-  width: 35%;
-}
-
-.glyphicon-info-sign {
-  font-size: 15px;
-  color: black;
 }
 
 /*Tooltip css*/
@@ -131,17 +118,4 @@ select {
 
 .info-body {
   text-align: left;
-}
-
-ul {
-  padding: 0px 20px;
-  margin:0px;
-}
-
-p {
-  margin: 0px;
-}
-
-#gradeEntry {
-  margin-bottom: 0px;
 }

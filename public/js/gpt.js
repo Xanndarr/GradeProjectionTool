@@ -1,29 +1,134 @@
 $(document).ready(function() {
 	resetAllFields();
+	var careerGrades = ['4(C-)','5(C)','6(B)','7(A)','8(A*)','9(A*)']
+    populateDropdown('career-grade-select', careerGrades);
 });
 
-var error = 0;
-$("#calcButton").click(function() {
-	$('.error').html("");
-	error = 0;
-	var rows = $("#gradeEntry").find("tr");
-  	rows.each(function(index, row) {
-    var inputs = $(row).find("input");
-    var subject = "null";
-    var targetGrade;
-    if (inputs.length) {
-    	subject = inputs[0].name;
-    	targetGrade = inputs[0].value;
-			var yearGroup = $("#choose-year")[0].value;
+$('.configure-button').click(function() {
+	if (this.className == 'configure-button year-select') {
+		$('#chooseYearDiv').children('button').each(function () {
+			console.log(this.classList);
+			this.classList.remove('button-clicked');
+		});
+	}
+	if (this.className == 'configure-button format-select') {
+		$('#chooseGradeFormatDiv').children('button').each(function () {
+			console.log(this.classList);
+			this.classList.remove('button-clicked');
+		});
+	}
+	$(this).addClass('button-clicked');
+	populateDropdowns(this.id)
+});
 
-	    populateBoxes(yearGroup, targetGrade, subject);
-    };
-  });
-	$('html, body').animate({
-   scrollTop: $(document).height()-$(window).height()},
-   1000,
-   "swing"
-	);
+function populateDropdowns(id) {
+	if (id == 'select-sublevels') {
+		var sublevels = ['1c', '1b','1a', '2c','2b','2a', '3c', '3b','3a', '4c','4b','4a',
+                   '5c', '5b','5a', '6c','6b','6a', '7c','7b','7a', '8c', '8b','8a',
+                   '8a+']
+        populateDropdown('current-grade-select', sublevels)
+    } else if (id == 'select-numbers') {
+    	var numbers = ['1','1+','2-','2','2+','3-','3','3+','4-','4','4+','5-','5','5+','6-'
+                          ,'6','6+','7-','7','7+','8-','8','8+', '9-','9', '9+']
+    	populateDropdown('current-grade-select', numbers)
+    }
+};
+
+function populateDropdown(dropdownClass, values) {
+	var dropdown = $("." + dropdownClass);
+	dropdown.empty();
+	dropdown.append($("<option selected='selected'/>").text(''));
+	for (x in values) {
+		dropdown.append($("<option />").text(values[x]));
+	}
+}
+
+$("#calculate-button").click(function() {
+	$("#back-button-2").show();
+	$("#back-button-1").hide();
+	$(".current-grade-select").attr("disabled", true);
+	var gradeIds = ['english','maths', 'science', 'custom1-grade', 'custom2-grade'];
+	for (x in gradeIds) {
+		var grade = $("#career-" + gradeIds[x] + "-grade").val();
+		var required = getRequiredGrades(grade);
+		if ($("#select-year-10").css('background-color') == 'rgb(255, 255, 255)') {
+			var year10required = required[0];
+			$('#year10-container').find("." + gradeIds[x]).find('.targetData').text(year10required);
+			y10showform();
+		}
+		if ($("#select-year-9").css('background-color') == 'rgb(255, 255, 255)') {
+			var year9required = required[1];
+			$('#year10-container').find("." + gradeIds[x]).find('.targetData').text(required[0]);
+			$('#year9-container').find("." + gradeIds[x]).find('.targetData').text(year9required);
+			y9showform();
+		}
+		
+	}
+});
+
+function getRequiredGrades(grade) {
+	// returns an array containing the required grades for y10/y9
+	var required;
+	switch(grade) {
+	    case "4(C-)":
+	    	required = ["3(D)","2-", "4a"];
+	    	break;
+	    case "5(C)":
+	    	required = ["4(C-)","3-", "5a"];
+	    	break;
+	    case "6(B)":
+	    	required = ["5(C)", "4-"];
+	    	break;
+	    case "7(A)":
+	    	required = ["6(B)", "5-"];
+	    	break;
+	    case "8(A*)":
+	    	required = ["7(A)", "6-"];
+	    	break;
+	    case "9(A*)":
+	    	required = ["8(A*)", "7-"];
+	    	break;
+	    default:
+	    	required = [];
+    }
+
+    return required;
+}
+
+var error = 0;
+$("#next-button").click(function() {
+	$(this).hide();
+	$(".career-grade-select").attr("disabled", true);
+	$("#calculate-button").show()
+	$("#back-button-1").show();
+	$("#current-grade-container").addClass('visible');
+	$("#current-grade-container").show();
+
+	$("#custom-subject1").prop("readonly", true);
+	var subject1 = $("#custom-subject1").val();
+	$(".custom-subject1-copy").html(subject1);
+	
+	$("#custom-subject2").prop("readonly", true);
+	var subject2 = $("#custom-subject2").val();
+	$(".custom-subject2-copy").html(subject2);
+});
+
+$('#back-button-1').click(function() {
+	$(this).hide();
+	$("#next-button").show();
+	$("#calculate-button").hide()
+	$("#current-grade-container").hide();
+	$("#custom-subject1").prop("readonly", false);
+	$("#custom-subject2").prop("readonly", false);
+	$(".career-grade-select").attr("disabled", false);
+});
+
+$('#back-button-2').click(function() {
+	$(this).hide();
+	$("#back-button-1").show();
+	$("#year10-container").hide();
+	$("#year9-container").hide();
+	$(".current-grade-select").attr("disabled", false);
 });
 
 function populateBoxes(yearGroup, targetGrade, subject) {
@@ -56,7 +161,7 @@ function formatGrade(grade) {
     var formattedGrade = grade;
     if ($("#choose-grade-format-ks3").is(":visible") && $("#choose-grade-format-ks3")[0].value === "percentages") {
         formattedGrade = formattedGrade + "%";
-    } else if ($("#choose-grade-format-ks4").is(":visible") && $("#choose-grade-format-ks4")[0].value === "varters") {
+    } else if ($("#choose-grade-format-ks4").is(":visible") && $("#choose-grade-format-ks4")[0].value === "letters") {
         formattedGrade = formattedGrade.toUpperCase();
     }
     return formattedGrade;
@@ -78,8 +183,8 @@ $('#gcses').find('.btn-up').click( function(){
 		case 'numbers':
 			projections = defaultProjectionsNumbers(gradeAbove);
 			break;
-		case 'varters':
-			projections = defaultProjectionsvarters(gradeAbove);
+		case 'letters':
+			projections = defaultProjectionsletters(gradeAbove);
 			break;
 		case 'sublevels':
 			projections = defaultProjectionsSublevels(gradeAbove);
@@ -123,8 +228,8 @@ $('#gcses').find('.btn-down').click( function(){
 		case 'numbers':
 			projections = defaultProjectionsNumbers(gradeBelow);
 			break;
-		case 'varters':
-			projections = defaultProjectionsvarters(gradeBelow);
+		case 'letters':
+			projections = defaultProjectionsletters(gradeBelow);
 			break;
 		case 'sublevels':
 			projections = defaultProjectionsSublevels(gradeBelow);
@@ -163,12 +268,6 @@ function convertYearGroupToNum(yearGroup) {
 	var year;
 
 	switch(yearGroup) {
-    case "year7":
-    	year = 7;
-    	break;
-    case "year8":
-    	year = 8;
-    	break;
     case "year9":
     	year = 9;
     	break;
@@ -191,12 +290,6 @@ function convertNumToYearGroup(yearGroup) {
 	var year;
 
 	switch(yearGroup) {
-    case 7:
-    	year = "year7";
-    	break;
-    case 8:
-    	year = "year8";
-    	break;
     case 9:
     	year = "year9";
     	break;
@@ -253,15 +346,15 @@ function predictGrades(yearAsNum, targetGrade) {
   		}
   	    return predictSublevels(yearAsNum, targetGrade);
   		break;
-  	case "varters":
+  	case "letters":
   		targetGrade = targetGrade.toUpperCase();
-  		var varters = ['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'U'];
-  		if (varters.indexOf(targetGrade) == -1) {
-  			$('.error').html("One of your varter grades is invalid.");
+  		var letters = ['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'U'];
+  		if (letters.indexOf(targetGrade) == -1) {
+  			$('.error').html("One of your letter grades is invalid.");
   			error = 1;
   			return;
   		}
-  	    return predictvarters(targetGrade);
+  	    return predictletters(targetGrade);
   		break;
   	case "percentages":
         if (isNaN(targetGrade)) {
@@ -309,21 +402,11 @@ function predictSublevels(year, grade) {
 	return predictions;
 }
 
-function predictPercentages(year, grade) {
-	var predictions = [];
-	while (year < 9) {
-		year++;
-		grade = predictedPercentageGrade(grade);
-		predictions.push(grade + '%');
-	}
-	predictions.push(convertPercentageToGCSEGrade(grade));
-	return predictions;
-}
 
 //year10 only
-function predictvarters(grade) {
+function predictletters(grade) {
 	var predictions = [];
-	predictions.push(predictedGCSEGradeY10varter(grade));
+	predictions.push(predictedGCSEGradeY10letter(grade));
 	return predictions;
 }
 
@@ -331,12 +414,6 @@ $("#choose-year").change(function() {
 	var dropdown = $("#choose-year");
 	var year = dropdown[0].value;
 	switch (year) {
-		case "year7":
-			y7showform();
-			break;
-		case "year8":
-			y8showform();
-			break;
 		case "year9":
 			y9showform();
 			break;
@@ -361,74 +438,25 @@ function resetFields() {
 }
 
 function resetAllFields() {
-  $('#choose-grade-format-ks4').hide();
-	$('#choose-grade-format-ks3').hide();
-  resetFields();
+    resetFields();
 	$('.error').html("");
-	$('#year7').hide();
-	$('#year8').hide();
-	$('#year9').hide();
-	$('#year10').hide();
-	$('#gcses').hide();
 }
 
 // Show relevant form fields for each year group
-function y7showform() {
-  resetFields();
-	$('.error').html("");
-	$('#choose-grade-format-ks4').hide();
-	$('#choose-grade-format-ks3').show();
-	$("#year7").show();
-	$("#year8").show();
-	$("#year9").show();
-	$("#year10").hide();
-	$("#gcses").show();
-}
 
-function y8showform() {
-  resetFields();
+function y10showform() {
+    resetFields();
 	$('.error').html("");
-	$('#choose-grade-format-ks4').hide();
-	$('#choose-grade-format-ks3').show();
-	$("#year7").hide();
-	$("#year8").show();
-	$("#year9").show();
-	$("#year10").hide();
-	$("#gcses").show();
+	$("#year10-container").addClass('visible');
+	$("#year10-container").show();
 }
 
 function y9showform() {
-  resetFields();
 	$('.error').html("");
-	$('#choose-grade-format-ks4').hide();
-	$('#choose-grade-format-ks3').show();
-	$("#year7").hide();
-	$("#year8").hide();
-	$("#year9").show();
-	$("#year10").hide();
-	$("#gcses").show();
+	$("#year10-container").addClass('visible');
+	$("#year9-container").addClass('visible');
+	$("#year10-container").show();
+	$("#year9-container").show();
 }
 
-function y10showform() {
-  resetFields();
-	$('.error').html("");
-	$('#choose-grade-format-ks3').hide();
-	$('#choose-grade-format-ks4').show();
-	$("#year7").hide();
-	$("#year8").hide();
-	$("#year9").hide();
-	$("#year10").show();
-	$("#gcses").show();
-}
 
-function y11showform() {
-  resetFields();
-	$('.error').html("");
-	$('#choose-grade-format-ks3').hide();
-	$('#choose-grade-format-ks4').show();
-	$("#year7").hide();
-	$("#year8").hide();
-	$("#year9").hide();
-	$("#year10").hide();
-	$("#gcses").show();
-}
