@@ -24,6 +24,7 @@ h1 {
 
 button {
   font-family: inherit;
+  font-size: 17px;
   text-decoration: none;
   color: white;
   width: 100px;
@@ -44,8 +45,21 @@ button:active {
   color: white;
 }
 
+button:focus, select:focus, input:focus {
+  outline: 0;
+}
+
+.button-clicked {
+  background-color: white;
+  color: #296092;
+}
+
+.button-unclicked {
+  background-color: #296092;
+  color: white;
+}
+
 #content {
-  width: 70%;
   margin: 0 auto;
 }
 
@@ -55,7 +69,7 @@ button:active {
 }
 
 .container {
-  width: 90%;
+  width: 80%;
   padding: 0 0 15px 15px;
   margin: 0 auto 30px auto;
   text-align: center;
@@ -73,4 +87,51 @@ button:active {
 
 #chooseYearDiv, #chooseGradeDiv {
   margin: 0 auto 15px auto;
+}
+
+#current-grade-container, #career-grade-container, #year10-container, #year9-container {
+  position: relative;
+  width: 20%;
+  margin: 1%;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline-block;
+}
+
+#year10-container, #year9-container {
+  width: 18%;
+}
+
+#current-grade-container, #career-grade-container {
+  width: 23%;
+}
+
+.dark-blue-background {
+  background-color: #030077;
+  color: white;
+}
+
+.light-blue-background {
+  background-color: #88b0ef;
+  color: white;
+}
+
+.grade-table-header {
+  font-size: 20px;
+}
+
+input, select {
+  height: 20px;
+  font-size: 16px;
+  font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+  width:100%;
+}
+
+input {
+  text-align: center;
 }

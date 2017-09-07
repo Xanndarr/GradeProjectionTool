@@ -242,6 +242,7 @@ function defaultProjectionsvarters(grade) {
 //- Returns the grade above or below the grade given
 var gradesArray = ['1(F/G)', '2(E/F)','3(D)','4(C)','5(B/C)','6-(B)','7(A)','8+(A*)','9(A*)']
 
+
 function returnGradeAbove(grade) {
   var indexAbove = gradesArray.indexOf(grade);
   if (indexAbove < gradesArray.indexOf('9(A*)')) {
