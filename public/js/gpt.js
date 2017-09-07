@@ -134,14 +134,13 @@ $('#back-button-2').click(function() {
 function populateBoxes(yearGroup, targetGrade, subject) {
 	var yearAsNum = convertYearGroupToNum(yearGroup);
 	var predictedGrades = predictGrades(yearAsNum, targetGrade);
-	console.log(predictedGrades[0]);
    //Set correlating year group box to predicted grade for that year
 
 	if (error == 0) {
 		if (yearAsNum == 11) {
-			$("" + yearGroup).find("" + subject).find('.targetData').text(predictedGrades.shift());
+			$("#" + yearGroup).find("." + subject ).find('.targetData').text(predictedGrades.shift());
 		} else {
-   		$("" + yearGroup).find("" + subject).find('.targetData').text(formatGrade(targetGrade));
+   		$("#" + yearGroup).find("." + subject).find('.targetData').text(formatGrade(targetGrade));
 		}
 	}
 
@@ -151,10 +150,10 @@ function populateBoxes(yearGroup, targetGrade, subject) {
    	while (predictedGrades.length > 1) {
    		yearCounter++;
    		var newYearGroup = convertNumToYearGroup(yearCounter);
-   		$("" +newYearGroup).find("" + subject).find('.targetData').text(predictedGrades.shift());
+   		$("#" + newYearGroup).find("." + subject).find('.targetData').text(predictedGrades.shift());
    	}
 
-   	$("#gcses").find("" + subject).find('.targetData').text(predictedGrades.shift());
+   	$("#gcses").find("." + subject).find('.targetData').text(predictedGrades.shift());
 }
 
 function formatGrade(grade) {
@@ -171,7 +170,7 @@ $('#gcses').find('.btn-up').click( function(){
 	$('.error').html("");
 	error = 0;
 	var subject = $(this).parent().parent().prop('className');
-	var rows = $("#predictions-container").find("" + subject);
+	var rows = $("#predictions-container").find("." + subject);
 	var currentGrade = $(rows[rows.length-1]).find('.targetData').text();
 	var gradeAbove = returnGradeAbove(currentGrade);
 	$(rows[rows.length-1]).find('.targetData').text(gradeAbove);
@@ -184,7 +183,11 @@ $('#gcses').find('.btn-up').click( function(){
 			projections = defaultProjectionsNumbers(gradeAbove);
 			break;
 		case 'letters':
+<<<<<<< HEAD
 			projections = defaultProjectionsletters(gradeAbove);
+=======
+			projections = defaultProjectionsLetters(gradeAbove);
+>>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
 			break;
 		case 'sublevels':
 			projections = defaultProjectionsSublevels(gradeAbove);
@@ -198,7 +201,6 @@ $('#gcses').find('.btn-up').click( function(){
 	}
 
 	var year = $("#choose-year")[0].value;
-	console.log(year);
 	if (year === 'year10') {
 		$(rows[3]).find('.targetData').text(formatGrade(projections.pop()));
 	} else {
@@ -211,12 +213,12 @@ $('#gcses').find('.btn-up').click( function(){
 
 $('#gcses').find('.btn-down').click( function(){
 	var subject = $(this).parent().parent().prop('className');
-	var originalTargetGrade = $('#gradeEntry').find('input[name=" + subject + "]')[0].value;
+	var originalTargetGrade = $('#gradeEntry').find("input[name=" + subject +"]")[0].value;
 
 	var yearGroup = $('#choose-year')[0].value;
 
 	var originalPredictions = predictGrades(convertYearGroupToNum(yearGroup), originalTargetGrade);
-	var rows = $("#predictions-container").find("" + subject);
+	var rows = $("#predictions-container").find("." + subject);
 
 	var currentGrade = $(rows[rows.length-1]).find('.targetData').text();
 	var gradeBelow = returnGradeBelow(currentGrade);
@@ -229,7 +231,11 @@ $('#gcses').find('.btn-down').click( function(){
 			projections = defaultProjectionsNumbers(gradeBelow);
 			break;
 		case 'letters':
+<<<<<<< HEAD
 			projections = defaultProjectionsletters(gradeBelow);
+=======
+			projections = defaultProjectionsLetters(gradeBelow);
+>>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
 			break;
 		case 'sublevels':
 			projections = defaultProjectionsSublevels(gradeBelow);
@@ -318,7 +324,6 @@ function predictGrades(yearAsNum, targetGrade) {
 	}
 
   var gradeFormat = dropdown.options[dropdown.selectedIndex].value;
-
   targetGrade = targetGrade.trim();
 
   switch(gradeFormat) {
@@ -354,7 +359,11 @@ function predictGrades(yearAsNum, targetGrade) {
   			error = 1;
   			return;
   		}
+<<<<<<< HEAD
   	    return predictletters(targetGrade);
+=======
+  	    return predictLetters(targetGrade);
+>>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
   		break;
   	case "percentages":
         if (isNaN(targetGrade)) {
@@ -404,9 +413,15 @@ function predictSublevels(year, grade) {
 
 
 //year10 only
+<<<<<<< HEAD
 function predictletters(grade) {
 	var predictions = [];
 	predictions.push(predictedGCSEGradeY10letter(grade));
+=======
+function predictLetters(grade) {
+	var predictions = [];
+	predictions.push(predictedGCSEGradeLetter(grade));
+>>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
 	return predictions;
 }
 
