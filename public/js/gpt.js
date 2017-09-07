@@ -183,11 +183,7 @@ $('#gcses').find('.btn-up').click( function(){
 			projections = defaultProjectionsNumbers(gradeAbove);
 			break;
 		case 'letters':
-<<<<<<< HEAD
 			projections = defaultProjectionsletters(gradeAbove);
-=======
-			projections = defaultProjectionsLetters(gradeAbove);
->>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
 			break;
 		case 'sublevels':
 			projections = defaultProjectionsSublevels(gradeAbove);
@@ -231,11 +227,7 @@ $('#gcses').find('.btn-down').click( function(){
 			projections = defaultProjectionsNumbers(gradeBelow);
 			break;
 		case 'letters':
-<<<<<<< HEAD
 			projections = defaultProjectionsletters(gradeBelow);
-=======
-			projections = defaultProjectionsLetters(gradeBelow);
->>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
 			break;
 		case 'sublevels':
 			projections = defaultProjectionsSublevels(gradeBelow);
@@ -315,72 +307,68 @@ function convertNumToYearGroup(yearGroup) {
 }
 
 function predictGrades(yearAsNum, targetGrade) {
-	var dropdown;
+	// var dropdown;
 
-	if (yearAsNum == 10 || yearAsNum == 11) {
-    dropdown = document.getElementById("choose-grade-format-ks4");
-	} else {
-		dropdown = document.getElementById("choose-grade-format-ks3");
-	}
+	// if (yearAsNum == 10 || yearAsNum == 11) {
+ //    dropdown = document.getElementById("choose-grade-format-ks4");
+	// } else {
+	// 	dropdown = document.getElementById("choose-grade-format-ks3");
+	// }
 
-  var gradeFormat = dropdown.options[dropdown.selectedIndex].value;
-  targetGrade = targetGrade.trim();
+ //  var gradeFormat = dropdown.options[dropdown.selectedIndex].value;
+ //  targetGrade = targetGrade.trim();
 
-  switch(gradeFormat) {
-  	case "numbers":
-  		if (yearAsNum == 7 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('5+')) {
-  			$('.error').html("Highest target grade for year 7 is 5+.");
-  			error = 1;
-  			return;
-  		} else if (yearAsNum == 8 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('8+')) {
-  			$('.error').html("Highest target grade for year 8 is 8+.");
-  			error = 1;
-  			return;
-  		} else if (gradesNumbers.indexOf(targetGrade) == -1) {
-  			$('.error').html("One of your number grades is invalid.");
-  			error = 1;
-  			return;
-  		}
-  		return predictNumbers(yearAsNum, targetGrade);
-  		break;
-  	case "sublevels":
-  		if (sublevels.indexOf(targetGrade) == -1) {
-  			$('.error').html("One of your sublevel grades is invalid.");
-  			error = 1;
-  			return;
-  		}
-  	    return predictSublevels(yearAsNum, targetGrade);
-  		break;
-  	case "letters":
-  		targetGrade = targetGrade.toUpperCase();
-  		var letters = ['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'U'];
-  		if (letters.indexOf(targetGrade) == -1) {
-  			$('.error').html("One of your letter grades is invalid.");
-  			error = 1;
-  			return;
-  		}
-<<<<<<< HEAD
-  	    return predictletters(targetGrade);
-=======
-  	    return predictLetters(targetGrade);
->>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
-  		break;
-  	case "percentages":
-        if (isNaN(targetGrade)) {
-          $('.error').html("Please enter only numbers between 1 and 100.");
-          error = 1;
-          return;
-  	  	} else if ( 100 < targetGrade || targetGrade < 0) {
-  				$('.error').html("Please enter a number between 1 and 100.");
-  				error = 1;
-  				return;
-  		}
-  	    return predictPercentages(yearAsNum, targetGrade);
-  		break;
-  	default:
-  		$('.error').html("An unexpected error has occurred. Please try again.");
-  		error = 1;
-  }
+ //  switch(gradeFormat) {
+ //  	case "numbers":
+ //  		if (yearAsNum == 7 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('5+')) {
+ //  			$('.error').html("Highest target grade for year 7 is 5+.");
+ //  			error = 1;
+ //  			return;
+ //  		} else if (yearAsNum == 8 && gradesNumbers.indexOf(targetGrade) > gradesNumbers.indexOf('8+')) {
+ //  			$('.error').html("Highest target grade for year 8 is 8+.");
+ //  			error = 1;
+ //  			return;
+ //  		} else if (gradesNumbers.indexOf(targetGrade) == -1) {
+ //  			$('.error').html("One of your number grades is invalid.");
+ //  			error = 1;
+ //  			return;
+ //  		}
+ //  		return predictNumbers(yearAsNum, targetGrade);
+ //  		break;
+ //  	case "sublevels":
+ //  		if (sublevels.indexOf(targetGrade) == -1) {
+ //  			$('.error').html("One of your sublevel grades is invalid.");
+ //  			error = 1;
+ //  			return;
+ //  		}
+ //  	    return predictSublevels(yearAsNum, targetGrade);
+ //  		break;
+ //  	case "letters":
+ //  		targetGrade = targetGrade.toUpperCase();
+ //  		var letters = ['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'U'];
+ //  		if (letters.indexOf(targetGrade) == -1) {
+ //  			$('.error').html("One of your letter grades is invalid.");
+ //  			error = 1;
+ //  			return;
+ //  		}
+ //  	    return predictletters(targetGrade);
+ //  		break;
+ //  	case "percentages":
+ //        if (isNaN(targetGrade)) {
+ //          $('.error').html("Please enter only numbers between 1 and 100.");
+ //          error = 1;
+ //          return;
+ //  	  	} else if ( 100 < targetGrade || targetGrade < 0) {
+ //  				$('.error').html("Please enter a number between 1 and 100.");
+ //  				error = 1;
+ //  				return;
+ //  		}
+ //  	    return predictPercentages(yearAsNum, targetGrade);
+ //  		break;
+ //  	default:
+ //  		$('.error').html("An unexpected error has occurred. Please try again.");
+ //  		error = 1;
+ //  }
 }
 
 
@@ -413,15 +401,9 @@ function predictSublevels(year, grade) {
 
 
 //year10 only
-<<<<<<< HEAD
 function predictletters(grade) {
 	var predictions = [];
 	predictions.push(predictedGCSEGradeY10letter(grade));
-=======
-function predictLetters(grade) {
-	var predictions = [];
-	predictions.push(predictedGCSEGradeLetter(grade));
->>>>>>> 6af87ec68c9c36416ff9627656c650ddccdeb0d1
 	return predictions;
 }
 
