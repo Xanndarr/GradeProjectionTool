@@ -54,6 +54,14 @@ button:focus, select:focus, input:focus {
   color: #296092;
 }
 
+.below-target {
+  background-color: #ff8e82;
+}
+
+.on-target {
+  background-color: #95f997;
+}
+
 .button-unclicked {
   background-color: #296092;
   color: white;
@@ -130,8 +138,6 @@ input, select {
   font-size: 16px;
   font-family: 'PT Sans', Helvetica, Arial, sans-serif;
   width:100%;
-}
-
-input {
   text-align: center;
 }
+

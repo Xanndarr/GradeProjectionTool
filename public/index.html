@@ -21,51 +21,78 @@
 
           <div class="container" id="input-box">
           <img class="logo" src="/assets/logo.png" alt="Future Frontiers logo"/>
-            <h2 class="heading">Control Panel <div class="info"><span class="glyphicon glyphicon-info-sign"></span>
-                                                <span class="info-text">
-                                                  <p class="info-header">info box if we need it</p>
-                                                </span>
-                                              </div></h2>
-            <div id="chooseYearDiv">
+            <div id="choose-year">
             <p>Year group: </p>
               <button class="configure-button year-select" id="select-year-9">9</button>
               <button class="configure-button year-select" id="select-year-10">10</button>
             </div>
-            <div id="chooseGradeFormatDiv">
+            <div id="choose-grade-format">
             <p>My grades are measured using: </p>
-              <button class="configure-button format-select" id="select-sublevels">Sublevels</button>
+              <button class="configure-button format-select hidden" id="select-sublevels">Sublevels</button>
               <button class="configure-button format-select" id="select-numbers">Numbers</button>
             </div>
             <div id="grade-prediction-container">
 
-            <div id="career-grade-container" class="visible">
+            <div id="current-grade-container" class="visible">
               <table>
-                <tr>
-                  <th colspan="2" class="grade-table-header">Career Grades</th>
+                 <tr>
+                  <th colspan="2" class="grade-table-header">Current Grades</th>
                 </tr>
                 <tr class="dark-blue-background">
                   <th>Subject</th>
-                  <th>Year target</th>
+                  <th>Grade</th>
                 </tr>
                 <tr>
                   <td>English</td>
-                  <td><select class="career-grade-select" id="career-english-grade"></select></td>
+                  <td><select class="current-grade-select" id="current-english-grade"></select></td>
                 </tr>
                 <tr>
                   <td>Maths</td>
-                  <td><select class="career-grade-select" id="career-maths-grade"></select></td>
+                  <td><select class="current-grade-select" id="current-maths-grade"></select></td>
                 </tr>
                 <tr>
                   <td>Science</td>
-                  <td><select class="career-grade-select" id="career-science-grade"></select></td>
+                  <td><select class="current-grade-select" id="current-science-grade"></select></td>
                 </tr>
                 <tr class="custom-subject1">
                   <td><input id="custom-subject1" name="custom-subject1" type="text" /></td>
-                  <td><select class="career-grade-select" id="career-custom1-grade"></select></td>
+                  <td><select class="current-grade-select" id="current-custom1-grade"></select></td>
                 </tr>
                 <tr class="custom-subject2">
                   <td><input id="custom-subject2" name="custom-subject1" type="text" /></td>
-                  <td><select class="career-grade-select" id="career-custom2-grade"></select></td>
+                  <td><select class="current-grade-select" id="current-custom2-grade"></select></td>
+                </tr>                
+              </table>
+            </div>
+
+            <div id="year9-container" class="hidden">
+              <table >
+                <tr>
+                  <th colspan="2" class="grade-table-header">End of Year 9</th>
+                </tr>
+                <tr class="light-blue-background">
+                  <th>Subject</th>
+                  <th>Goal Grade</th>
+                </tr>
+                <tr class="english">
+                  <td>English</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="maths">
+                  <td>Maths</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="science">
+                  <td>Science</td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="custom-subject1">
+                  <td class="custom-subject1-copy"></td>
+                  <td class="targetData"></td>
+                </tr>
+                <tr class="custom-subject2">
+                  <td class="custom-subject2-copy"></td>
+                  <td class="targetData"></td>
                 </tr>
               </table>
             </div>
@@ -77,7 +104,7 @@
                 </tr>
                 <tr class="light-blue-background">
                   <th>Subject</th>
-                  <th>Year target</th>
+                  <th>Goal Grade</th>
                 </tr>
                 <tr class="english">
                   <td>English</td>
@@ -102,66 +129,34 @@
               </table>
             </div>
 
-            <div id="year9-container" class="hidden">
-              <table >
-                <tr>
-                  <th colspan="2" class="grade-table-header">End of Year 9</th>
-                </tr>
-                <tr class="light-blue-background">
-                  <th>Subject</th>
-                  <th>Year target</th>
-                </tr>
-                <tr class="english">
-                  <td>English</td>
-                  <td class="targetData"></td>
-                </tr>
-                <tr class="maths">
-                  <td>Maths</td>
-                  <td class="targetData"></td>
-                </tr>
-                <tr class="science">
-                  <td>Science</td>
-                  <td class="targetData"></td>
-                </tr>
-                <tr class="custom-subject1">
-                  <td class="custom-subject1-copy"></td>
-                  <td class="targetData"></td>
-                </tr>
-                <tr class="custom-subject2">
-                  <td class="custom-subject2-copy"></td>
-                  <td class="targetData"></td>
-                </tr>
-              </table>
-            </div>
-
-            <div id="current-grade-container" class="hidden">
+            <div id="career-grade-container" class="hidden">
               <table>
-                 <tr>
-                  <th colspan="2" class="grade-table-header">Current Grades</th>
+                <tr>
+                  <th colspan="2" class="grade-table-header">GCSE Goal</th>
                 </tr>
                 <tr class="dark-blue-background">
                   <th>Subject</th>
-                  <th>Year target</th>
+                  <th>Goal Grade</th>
                 </tr>
                 <tr>
                   <td>English</td>
-                  <td><select class="current-grade-select" id="current-english-grade"></select></td>
+                  <td><select class="career-grade-select" id="career-english-grade"></select></td>
                 </tr>
                 <tr>
                   <td>Maths</td>
-                  <td><select class="current-grade-select" id="current-maths-grade"></select></td>
+                  <td><select class="career-grade-select" id="career-maths-grade"></select></td>
                 </tr>
                 <tr>
                   <td>Science</td>
-                  <td><select class="current-grade-select" id="current-science-grade"></select></td>
+                  <td><select class="career-grade-select" id="career-science-grade"></select></td>
                 </tr>
                 <tr>
                   <td class="custom-subject1-copy"></td>
-                  <td><select class="current-grade-select" id="current-custom1-grade"></select></td>
+                  <td><select class="career-grade-select" id="career-custom1-grade"></select></td>
                 </tr>
                 <tr>
                   <td class="custom-subject2-copy"></td>
-                  <td><select class="current-grade-select" id="current-custom2-grade"></select></td>
+                  <td><select class="career-grade-select" id="career-custom2-grade"></select></td>
                 </tr>
               </table>
             </div>
