@@ -59,17 +59,19 @@ function populateDropdown(dropdownClass, values) {
 $("#calculate-button").click(function() {
 	$("#back-button-2").show();
 	$("#back-button-1").hide();
-	$(".current-grade-select").attr("disabled", true);
+	$(".career-grade-select").attr("disabled", true);
 	var gradeIds = ['english','maths', 'science', 'custom1', 'custom2'];
 	for (x in gradeIds) {
-		var grade = $("#career-" + gradeIds[x] + "-grade").val();
-		var required = getRequiredGrades(grade);
+		var gcseGrade = $("#career-" + gradeIds[x] + "-grade").val();
+		var required = getRequiredGrades(gcseGrade);
+		var year10required = required[0];
+		var currentGrade = $("#current-" + gradeIds[x] + "-grade").val();
 		if ($("#select-year-10").hasClass('button-clicked')) {
-			var year10required = required[0];
+			
 			$('#year10-container').find("." + gradeIds[x]).find('.targetData').text(year10required);
 			y10showform();
 
-			var currentGrade = $("#current-" + gradeIds[x] + "-grade").val();
+			
 			addColourIndicatorNumbers(currentGrade, year10required);
 		}
 		if ($("#select-year-9").hasClass('button-clicked')) {
@@ -83,7 +85,7 @@ $("#calculate-button").click(function() {
 				addColourIndicatorNumbers(currentGrade, year9required);
 			}
 
-			$('#year10-container').find("." + gradeIds[x]).find('.targetData').text(required[0]);
+			$('#year10-container').find("." + gradeIds[x]).find('.targetData').text(year10required);
 			$('#year9-container').find("." + gradeIds[x]).find('.targetData').text(year9required);
 			y9showform();
 		}
@@ -180,7 +182,7 @@ $('#back-button-2').click(function() {
 	$("#back-button-1").show();
 	$("#year10-container").hide();
 	$("#year9-container").hide();
-	$(".current-grade-select").attr("disabled", false);
+	$(".career-grade-select").attr("disabled", false);
 	$("tr").removeClass('below-target');
 	$("tr").removeClass('on-target');
 });
