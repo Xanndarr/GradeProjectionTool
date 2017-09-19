@@ -1,3 +1,5 @@
+var currentStep = 1;
+
 $(document).ready(function() {
 	resetAllFields();
 	var careerGrades = ['9(A*)','8(A*)','7(A)','6(B)','5(C)','4(C-)']
@@ -7,14 +9,12 @@ $(document).ready(function() {
 $('.year-select').click(function() {
 	$('#choose-year').children('button').each(function () {
 		this.classList.remove('button-clicked');
-		this.disabled = true;
 	});
 })
 
 $('.format-select').click(function() {
 	$('#choose-grade-format').children('button').each(function () {
 		this.classList.remove('button-clicked');
-		this.disabled = true;
 	});
 })
 
@@ -50,15 +50,16 @@ function populateDropdowns(id) {
 function populateDropdown(dropdownClass, values) {
 	var dropdown = $("." + dropdownClass);
 	dropdown.empty();
-	dropdown.append($("<option selected='selected'/>").text(''));
+	dropdown.append($("<option value='default' selected='selected'/>").text(''));
 	for (x in values) {
 		dropdown.append($("<option />").text(values[x]));
 	}
 }
 
 $("#calculate-button").click(function() {
-	$("#back-button-2").show();
-	$("#back-button-1").hide();
+	$(this).hide();
+	$("#back-button-3").show();
+	$("#back-button-2").hide();
 	$(".career-grade-select").attr("disabled", true);
 	var gradeIds = ['english','maths', 'science', 'custom1', 'custom2'];
 	for (x in gradeIds) {
@@ -91,6 +92,8 @@ $("#calculate-button").click(function() {
 		}
 		
 	}
+	currentStep += 1;
+	showTextForStep(currentStep);
 });
 
 function addColourIndicatorNumbers(currentGrade, requiredGrade) {
@@ -150,11 +153,25 @@ function getRequiredGrades(grade) {
 }
 
 var error = 0;
-$("#next-button").click(function() {
+
+$("#next-button-1").click(function() {
+	$(this).hide();
+	$("#back-button-1").show();
+	$("#next-button-2").show();
+	$("#current-grade-container").addClass('visible');
+	$("#current-grade-container").show();
+	currentStep += 1;
+	showTextForStep(currentStep);
+
+	setButtonsDisabled(true);
+});
+
+$("#next-button-2").click(function() {
 	$(this).hide();
 	$(".current-grade-select").attr("disabled", true);
 	$("#calculate-button").show()
-	$("#back-button-1").show();
+	$("#back-button-2").show();
+	$("#back-button-1").hide();
 	$("#career-grade-container").addClass('visible');
 	$("#career-grade-container").show();
 
@@ -165,34 +182,48 @@ $("#next-button").click(function() {
 	$("#custom-subject2").prop("readonly", true);
 	var subject2 = $("#custom-subject2").val();
 	$(".custom-subject2-copy").html(subject2);
+	currentStep += 1;
+	showTextForStep(currentStep);
 });
 
 $('#back-button-1').click(function() {
 	$(this).hide();
-	$("#next-button").show();
-	$("#calculate-button").hide()
-	$("#career-grade-container").hide();
-	$("#custom-subject1").prop("readonly", false);
-	$("#custom-subject2").prop("readonly", false);
-	$(".current-grade-select").attr("disabled", false);
+	$("#next-button-1").show();
+	$("#next-button-2").hide();
+	$("#current-grade-container").hide();
+	setButtonsDisabled(false);
+	currentStep -= 1;
+	showTextForStep(currentStep);
 });
 
 $('#back-button-2').click(function() {
 	$(this).hide();
 	$("#back-button-1").show();
+	$("#next-button-2").show();
+	$("#calculate-button").hide()
+	$("#career-grade-container").hide();
+	$("#custom-subject1").prop("readonly", false);
+	$("#custom-subject2").prop("readonly", false);
+	$(".current-grade-select").attr("disabled", false);
+	resetFields();
+	currentStep -= 1;
+	showTextForStep(currentStep);
+});
+
+$('#back-button-3').click(function() {
+	$(this).hide();
+	$("#back-button-2").show();
 	$("#year10-container").hide();
 	$("#year9-container").hide();
 	$(".career-grade-select").attr("disabled", false);
 	$("tr").removeClass('below-target');
 	$("tr").removeClass('on-target');
+	currentStep -= 1;
+	showTextForStep(currentStep);
 });
 
 function resetFields() {
-    var inputs = $(document).find("input");
-    $('#predictions-container').find(".targetData").text("");
-    inputs.each(function(index, input) {
-        input.value='';
-    });
+    $('.career-grade-select').val('default');
 }
 
 function resetAllFields() {
@@ -203,7 +234,6 @@ function resetAllFields() {
 // Show relevant form fields for each year group
 
 function y10showform() {
-    resetFields();
 	$('.error').html("");
 	$("#year10-container").addClass('visible');
 	$("#year10-container").show();
@@ -217,4 +247,34 @@ function y9showform() {
 	$("#year9-container").show();
 }
 
+function showTextForStep(stepNumber) {
+	var text = "Error!"
+	switch (stepNumber) {
+		case 1:
+			text = "Welcome! Start by selecting your year group and grade format below, then press next.";
+			break;
+		case 2:
+			text = "Use the dropdown menu to select your <u>current grades</u>, filling in the boxes with 2 more subjects.";
+			break;
+		case 3:
+			text = "Now, use the dropdown menus to select your <u>gcse target grades</u>. Press calculate!";
+			break;
+		case 4:
+			text = "Your current grades should now be highlighted in different colours to mean different things. <ul><li>Red - You are below target and should discuss with your coach how you can improve this</li><li>Green - You are on target and should ensure to keep working at the same level</li><li>Gold - You are working at a level much higher than your target, consider aiming higher!</li></ul>";
+			break;
+		default:
+			text= "Error!"
+	}
+	$('#instructions-text').html(text);
+}
+
+function setButtonsDisabled(boolean) {
+	$('#choose-year').children('button').each(function () {
+		this.disabled = boolean;
+	});
+
+	$('#choose-grade-format').children('button').each(function () {
+		this.disabled = boolean;
+	});
+}
 

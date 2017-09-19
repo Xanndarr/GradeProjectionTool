@@ -18,8 +18,14 @@ body {
   background-color: transparent;
 }
 
-h1 {
+.faded-header {
   color: rgba(255, 255, 255, 0.4);
+}
+
+#instruction-header {
+  font-size: 1.5em;
+  font-weight: bolder;
+  opacity: 0.7;
 }
 
 button {
@@ -30,19 +36,14 @@ button {
   width: 100px;
   height: 30px;
   margin: 10px auto;
-  background-color: #296092;
-  border: 2px solid #296092;
+  background-color: #030077;
   border-radius: 5px;
+  border-style: none;
 }
 
 button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #296092;
-}
-
-button:active {
-  background-color: #296092;
-  color: white;
+  background-color:rgba(3, 0, 119, 0.5);
+  border-color: rgba(3, 0, 119, 0.5);
 }
 
 button:focus, select:focus, input:focus {
@@ -50,8 +51,8 @@ button:focus, select:focus, input:focus {
 }
 
 .button-clicked {
-  background-color: white;
-  color: #296092;
+  background-color: rgba(3, 0, 119, 0.5);
+  border-color: rgba(3, 0, 119, 0.5);
 }
 
 .below-target {
@@ -91,10 +92,6 @@ button:focus, select:focus, input:focus {
   width: 10%;
   height: 20%;
   padding-top: 15px;
-}
-
-#chooseYearDiv, #chooseGradeDiv {
-  margin: 0 auto 15px auto;
 }
 
 #current-grade-container, #career-grade-container, #year10-container, #year9-container {
@@ -141,3 +138,27 @@ input, select {
   text-align: center;
 }
 
+.step-text {
+  font-size: 1.3em;
+  font-weight: bolder;
+}
+
+.text-box {
+  margin: 0 auto;
+  width: 40%;
+}
+
+#instructions {
+  border: 2px solid black;
+  border-radius: 5px;
+  background: rgba(3, 0, 119, 0.1);
+  margin:1%;
+}
+
+#instructions-text {
+  margin: 10px 0px;
+}
+
+.label {
+  font-size: 20px;
+}

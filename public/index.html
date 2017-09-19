@@ -21,19 +21,26 @@
 
           <div class="container" id="input-box">
           <img class="logo" src="/assets/logo.png" alt="Future Frontiers logo"/>
+          <div class="text-box">
+            <div id="instructions">
+            <p id="instructions-text">
+              Welcome! Start by selecting your year group and grade format below, then press next.
+            </p>
+            </div>
+          </div>
             <div id="choose-year">
-            <p>Year group: </p>
+            <p class="label">Year group</p>
               <button class="configure-button year-select" id="select-year-9">9</button>
               <button class="configure-button year-select" id="select-year-10">10</button>
             </div>
             <div id="choose-grade-format">
-            <p>My grades are measured using: </p>
+            <p class="label">Grade format </p>
               <button class="configure-button format-select hidden" id="select-sublevels">Sublevels</button>
               <button class="configure-button format-select" id="select-numbers">Numbers</button>
             </div>
             <div id="grade-prediction-container">
 
-            <div id="current-grade-container" class="visible">
+            <div id="current-grade-container" class="hidden">
               <table>
                  <tr>
                   <th colspan="2" class="grade-table-header">Current Grades</th>
@@ -164,12 +171,12 @@
             </div>
 
             <div>
-                <p class="error"></p>
-            </div>
-            <div>
-              <button id="next-button">Next</button>
+              
               <button id="back-button-1" class="hidden">Back</button>
               <button id="back-button-2" class="hidden">Back</button>
+              <button id="back-button-3" class="hidden">Back</button>
+              <button id="next-button-1">Next</button>
+              <button id="next-button-2" class="hidden">Next</button>
               <button id="calculate-button" class="hidden">Calculate</button>
             </div>
           </div>
