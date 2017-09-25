@@ -97,7 +97,9 @@ $("#calculate-button").click(function() {
 });
 
 function addColourIndicatorNumbers(currentGrade, requiredGrade) {
-	if (numberGradeIsLessThan(currentGrade, requiredGrade)) {
+	if (numberGradeIsHigherThan(currentGrade, requiredGrade)) {
+		colourBlue()
+	} else if (numberGradeIsLessThan(currentGrade, requiredGrade)) {
 		colourRed();
 	} else {
 		colourGreen();
@@ -120,6 +122,11 @@ function colourRed() {
 function colourGreen() {
 	var gradeIds = ['english','maths', 'science', 'custom1', 'custom2'];
 	$("#current-" + gradeIds[x] + "-grade").closest("tr").addClass('on-target');
+}
+
+function colourBlue() {
+	var gradeIds = ['english','maths', 'science', 'custom1', 'custom2'];
+	$("#current-" + gradeIds[x] + "-grade").closest("tr").addClass('above-target');
 }
 
 function getRequiredGrades(grade) {
@@ -162,7 +169,9 @@ $("#next-button-1").click(function() {
 	$("#current-grade-container").show();
 	currentStep += 1;
 	showTextForStep(currentStep);
+	if (!$("#select-year-9").hasClass('button-clicked') && !$("#select-year-10").hasClass('button-clicked'))  {
 
+	}
 	setButtonsDisabled(true);
 });
 
@@ -218,6 +227,7 @@ $('#back-button-3').click(function() {
 	$(".career-grade-select").attr("disabled", false);
 	$("tr").removeClass('below-target');
 	$("tr").removeClass('on-target');
+	$("tr").removeClass('above-target');
 	currentStep -= 1;
 	showTextForStep(currentStep);
 });
@@ -254,13 +264,13 @@ function showTextForStep(stepNumber) {
 			text = "Welcome! Start by selecting your year group and grade format below, then press next.";
 			break;
 		case 2:
-			text = "Use the dropdown menu to select your <u>current grades</u>, filling in the boxes with 2 more subjects.";
+			text = "Use the dropdown menu to select your <u>most current grades</u>. Fill in the boxes with 2 additional subjects that you think are relevant to your career goals";
 			break;
 		case 3:
-			text = "Now, use the dropdown menus to select your <u>gcse target grades</u>. Press calculate!";
+			text = "Now, use the dropdown menus to select your <u>gcse goal grades</u>. Press calculate!";
 			break;
 		case 4:
-			text = "Your current grades should now be highlighted in different colours to mean different things. <ul><li>Red - You are below target and should discuss with your coach how you can improve this</li><li>Green - You are on target and should ensure to keep working at the same level</li><li>Gold - You are working at a level much higher than your target, consider aiming higher!</li></ul>";
+			text = "Your current grades should now be highlighted in different colours to represent your progress:<br><br><span style='background-color: #ff8e82; color: #ff8e82'>____</span> You are below target and should discuss with your coach how you can improve this<br><span style='background-color: #95f997; color: #95f997'>____</span> You are on track and should discuss with your coach how to keep working at the same level<br><span style='background-color: #3972ce; color: #3972ce'>____</span> You are working at a level higher than your target, consider aiming higher with your goal GCSE grades";
 			break;
 		default:
 			text= "Error!"

@@ -63,6 +63,10 @@ button:focus, select:focus, input:focus {
   background-color: #95f997;
 }
 
+.above-target {
+  background-color: #3972ce;
+}
+
 .button-unclicked {
   background-color: #296092;
   color: white;

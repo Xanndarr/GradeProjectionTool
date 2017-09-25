@@ -19,3 +19,18 @@ function sublevelGradeIsLessThan(grade, comparisonGrade) {
   }
   return false;
 }
+
+function numberGradeIsHigherThan(grade, comparisonGrade) {
+  if (numbers.indexOf(grade) >= (numbers.indexOf(comparisonGrade) + 1)) {
+    return true;
+  }
+  return false;
+}
+
+function sublevelGradeIsHigherThan(grade, comparisonGrade) {
+  if (sublevels.indexOf(grade) >= (sublevels.indexOf(comparisonGrade) + 1)) {
+    return true;
+  }
+  return false;
+}
+
