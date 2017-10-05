@@ -57,6 +57,7 @@ function populateDropdown(dropdownClass, values) {
 }
 
 $("#calculate-button").click(function() {
+	if (stepComplete(currentStep)) {
 	$(this).hide();
 	$("#back-button-3").show();
 	$("#back-button-2").hide();
@@ -68,11 +69,11 @@ $("#calculate-button").click(function() {
 		var year10required = required[0];
 		var currentGrade = $("#current-" + gradeIds[x] + "-grade").val();
 		if ($("#select-year-10").hasClass('button-clicked')) {
-			
+
 			$('#year10-container').find("." + gradeIds[x]).find('.targetData').text(year10required);
 			y10showform();
 
-			
+
 			addColourIndicatorNumbers(currentGrade, year10required);
 		}
 		if ($("#select-year-9").hasClass('button-clicked')) {
@@ -90,10 +91,13 @@ $("#calculate-button").click(function() {
 			$('#year9-container').find("." + gradeIds[x]).find('.targetData').text(year9required);
 			y9showform();
 		}
-		
+
 	}
 	currentStep += 1;
 	showTextForStep(currentStep);
+} else {
+	showTextForIncompleteStep(currentStep);
+}
 });
 
 function addColourIndicatorNumbers(currentGrade, requiredGrade) {
@@ -162,37 +166,72 @@ function getRequiredGrades(grade) {
 var error = 0;
 
 $("#next-button-1").click(function() {
-	$(this).hide();
-	$("#back-button-1").show();
-	$("#next-button-2").show();
-	$("#current-grade-container").addClass('visible');
-	$("#current-grade-container").show();
-	currentStep += 1;
-	showTextForStep(currentStep);
-	if (!$("#select-year-9").hasClass('button-clicked') && !$("#select-year-10").hasClass('button-clicked'))  {
-
+	if (stepComplete(currentStep)) {
+		$(this).hide();
+		$("#back-button-1").show();
+		$("#next-button-2").show();
+		$("#current-grade-container").addClass('visible');
+		$("#current-grade-container").show();
+		currentStep += 1;
+		showTextForStep(currentStep);
+		setButtonsDisabled(true);
+  } else {
+		showTextForIncompleteStep(currentStep);
 	}
-	setButtonsDisabled(true);
 });
 
-$("#next-button-2").click(function() {
-	$(this).hide();
-	$(".current-grade-select").attr("disabled", true);
-	$("#calculate-button").show()
-	$("#back-button-2").show();
-	$("#back-button-1").hide();
-	$("#career-grade-container").addClass('visible');
-	$("#career-grade-container").show();
+function stepComplete(stepNumber) {
+	switch (stepNumber) {
+		case 1:
+			return ($("#select-year-9").hasClass('button-clicked') &&
+							($("#select-sublevels").hasClass('button-clicked') ||
+							 $("#select-numbers").hasClass('button-clicked'))) ||
+							 $("#select-year-10").hasClass('button-clicked');
+		case 2:
+		  var complete = true;
+			$("#current-grade-container :input").each(function() {
+					if (this.value === '' || this.value === 'default') {
+						complete = false;
+					}
+			});
+			return complete;
+		case 3:
+			var complete = true;
+			$("#career-grade-container :input").each(function() {
+					if (this.value === 'default') {
+						complete = false;
+					}
+			});
+			return complete;
+		default:
+			return false;
+	}
+}
 
-	$("#custom-subject1").prop("readonly", true);
-	var subject1 = $("#custom-subject1").val();
-	$(".custom-subject1-copy").html(subject1);
-	
-	$("#custom-subject2").prop("readonly", true);
-	var subject2 = $("#custom-subject2").val();
-	$(".custom-subject2-copy").html(subject2);
-	currentStep += 1;
-	showTextForStep(currentStep);
+$("#next-button-2").click(function() {
+	if (stepComplete(currentStep)) {
+		$(this).hide();
+		$(".current-grade-select").attr("disabled", true);
+		$("#calculate-button").show()
+		$("#back-button-2").show();
+		$("#back-button-1").hide();
+		$("#career-grade-container").addClass('visible');
+		$("#career-grade-container").show();
+
+		$("#custom-subject1").prop("readonly", true);
+		var subject1 = $("#custom-subject1").val();
+		$(".custom-subject1-copy").html(subject1);
+
+		$("#custom-subject2").prop("readonly", true);
+		var subject2 = $("#custom-subject2").val();
+		$(".custom-subject2-copy").html(subject2);
+		// console.log(currentStep)
+		console.log(stepComplete(currentStep))
+		currentStep += 1;
+		showTextForStep(currentStep);
+	} else {
+		showTextForIncompleteStep(currentStep);
+	}
 });
 
 $('#back-button-1').click(function() {
@@ -276,6 +315,26 @@ function showTextForStep(stepNumber) {
 			text= "Error!"
 	}
 	$('#instructions-text').html(text);
+	$('#instructions').css("background-color", "rgba(3, 0, 119, 0.1)")
+}
+
+function showTextForIncompleteStep(stepNumber) {
+	var text = "Error!"
+	switch (stepNumber) {
+		case 1:
+			text = "You must select a year group and a grade format!";
+			break;
+		case 2:
+			text = "Ensure you have filled in the 2 input boxes and all of the dropdown menus.";
+			break;
+		case 3:
+			text = "Make sure you have selected from all of the dropdown menus. ";
+			break;
+		default:
+			text= "Error!"
+	}
+	$('#instructions-text').html(text);
+	$('#instructions').css("background-color", "rgba(244, 66, 75, 0.1)")
 }
 
 function setButtonsDisabled(boolean) {
@@ -287,4 +346,3 @@ function setButtonsDisabled(boolean) {
 		this.disabled = boolean;
 	});
 }
-
