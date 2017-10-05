@@ -166,3 +166,12 @@ input, select {
 .label {
   font-size: 20px;
 }
+
+#reset-button {
+  background-color: rgba(244, 66, 75, 1);
+}
+
+#reset-button:hover {
+  background-color:rgba(244, 66, 75, 0.5);
+  border-color: rgba(244, 66, 75, 0.5);
+}
