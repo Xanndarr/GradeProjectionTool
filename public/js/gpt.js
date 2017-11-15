@@ -1,5 +1,5 @@
 var currentStep = 1;
-var DEBUGGING = false;
+var DEBUGGING = true;
 
 $(document).ready(function() {
 	var careerGrades = ['9(A*)','8(A*)','7(A)','6(B)','5(C)','4(C-)']
@@ -133,10 +133,10 @@ function showTextForStep(stepNumber) {
 			text = "Use the dropdown menu to select your <u>most current grades</u>. Fill in the boxes with 2 additional subjects that you think are relevant to your career goals";
 			break;
 		case 3:
-			text = "Now, use the dropdown menus to select your <u>gcse goal grades</u>. Press calculate!";
+			text = "Now, use the dropdown menus to select your <u>Career Target GCSE Grades</u>. Press calculate to find your Flight Path!";
 			break;
 		case 4:
-			text = "Your current grades should now be highlighted in different colours to represent your progress:<br><br><span style='background-color: #ff8e82; color: #ff8e82'>____</span> You are below target and should discuss with your coach how you can improve this<br><span style='background-color: #95f997; color: #95f997'>____</span> You are on track and should discuss with your coach how to keep working at the same level<br><span style='background-color: #3972ce; color: #3972ce'>____</span> You are working at a level higher than your target, consider aiming higher with your goal GCSE grades";
+			text = "Your current grades should now be highlighted in different colours to represent your progress:<br><br><span style='background-color: #ff8e82; color: #ff8e82'>____</span> You are below target and should discuss with your coach how you can improve this<br><br><span style='background-color: #95f997; color: #95f997'>____</span> You are on track and should discuss with your coach how to keep working at the same level<br><br><span style='background-color: #3972ce; color: #3972ce'>____</span> You are working at a level higher than your target, consider aiming higher with your goal GCSE grades";
 			break;
 		default:
 			text= "Error!"
@@ -164,14 +164,14 @@ function showTextForIncompleteStep(stepNumber) {
 	$('#instructions').css("background-color", "rgba(244, 66, 75, 0.1)")
 }
 
-function setButtonsDisabled(boolean) {
-	$('#choose-year').children('button').each(function () {
-		this.disabled = boolean;
-	});
-
-	$('#choose-grade-format').children('button').each(function () {
-		this.disabled = boolean;
-	});
+function setButtonsHidden(setHidden) {
+	if(setHidden) {
+		$('#choose-year').hide();
+		$('#choose-grade-format').hide();
+	} else {
+		$('#choose-year').show();
+		$('#choose-grade-format').show();
+	}
 }
 
 function stepComplete(stepNumber) {
@@ -207,7 +207,7 @@ function showStep(stepNumber) {
 		case 1:
 			$("#current-grade-container").hide();
 			$("#career-grade-container").hide();
-			setButtonsDisabled(false);
+			setButtonsHidden(false);
 
 			$("#next-button").show();
 			$("#back-button").hide();
@@ -218,11 +218,12 @@ function showStep(stepNumber) {
 			$("#next-button").show()
 			$("#calculate-button").hide()
 
+
 			$("#current-grade-container").addClass('visible');
 			$("#current-grade-container").show();
 			$(".current-grade-select").attr("disabled", false);
 			$("#career-grade-container").hide();
-			setButtonsDisabled(true);
+			setButtonsHidden(true);
 			$("#custom-subject1").prop("readonly", false);
 			$("#custom-subject2").prop("readonly", false);
 			break;
@@ -258,7 +259,7 @@ function showStep(stepNumber) {
 
 function addColourIndicatorNumbers(currentGrade, requiredGrade) {
 	if (numberGradeIsHigherThan(currentGrade, requiredGrade)) {
-		colourBlue()
+		colourBlue();
 	} else if (numberGradeIsLessThan(currentGrade, requiredGrade)) {
 		colourRed();
 	} else {
@@ -267,9 +268,13 @@ function addColourIndicatorNumbers(currentGrade, requiredGrade) {
 }
 
 function addColourIndicatorSublevels(currentGrade, requiredGrade) {
-	if (sublevelGradeIsLessThan(currentGrade, requiredGrade)) {
+	if (sublevelGradeIsHigherThan(currentGrade, requiredGrade)) {
+		colourBlue();
+	} else if (sublevelGradeIsLessThan(currentGrade, requiredGrade)) {
 		colourRed();
 	} else {
+		console.log(currentGrade)
+		console.log(requiredGrade)
 		colourGreen();
 	}
 }
@@ -310,7 +315,7 @@ function getRequiredGrades(grade) {
 	    	required = ["7", "6", "8b"];
 	    	break;
 	    case "9(A*)":
-	    	required = ["8", "7", "8a|"];
+	    	required = ["8", "7", "8a"];
 	    	break;
 	    default:
 	    	required = [];
