@@ -1,5 +1,5 @@
 var currentStep = 1;
-var DEBUGGING = true;
+var DEBUGGING = false;
 
 $(document).ready(function() {
 	var careerGrades = ['9(A*)','8(A*)','7(A)','6(B)','5(C)','4(C-)']
